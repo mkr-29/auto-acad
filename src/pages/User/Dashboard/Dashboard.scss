@@ -1,0 +1,16 @@
+.dashboard{
+    background-color: #0b2f9f;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    &-main{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    &-logo{
+        width: 400px;
+        height: 400px;
+    }
+}

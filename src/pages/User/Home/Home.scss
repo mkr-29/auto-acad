@@ -1,0 +1,19 @@
+.home {
+  background-color: #0b2f9f;
+  &-logo {
+    width: 400px;
+    height: 400px;
+  }
+  &-landing {
+    height: 100vh;
+    &-main {
+      color: #fff;
+      h1 {
+        font-size: 4rem;
+      }
+      p {
+        font-size: 1.5rem;
+      }
+    }
+  }
+}
