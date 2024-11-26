@@ -1,0 +1,37 @@
+.side-menu{
+    background-color: #98DED9;
+    display: flex;
+    height: 100%;
+    animation: sideMenu 0.5s ease-in-out;
+    ul{
+        display: flex;
+        flex-direction: column;
+        margin-top: 3.6rem;
+        list-style: none;
+        padding: 0;
+        li{
+            padding: 0.7rem 1.4rem;
+            border-top: 1px solid black;
+            display: flex;
+            &:last-child{
+                border-bottom: 1px solid black;
+            }
+            a{
+                text-decoration: none;
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: black;
+            }
+        }
+    }
+}
+
+@keyframes sideMenu {
+    // slide in
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}

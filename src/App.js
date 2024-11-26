@@ -1,9 +1,9 @@
 import "./App.css";
-import { Route, Router, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Home from "./pages/User/Home/index.page";
 import SignIn from "./pages/User/SignIn/index.page";
 import Dashboard from "./pages/User/Dashboard/index.page";
-import PrivateRoutes from "./routes/PrivateRoutes";
+// import PrivateRoutes from "./routes/PrivateRoutes";
 
 function App() {
   return (
