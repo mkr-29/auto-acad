@@ -1,13 +1,6 @@
 .footer {
   background-color: #161d6f;
-  background: linear-gradient(
-    180deg,
-    rgba(2, 0, 36, 1) 0%,
-    rgba(9, 9, 121, 1) 20%,
-    rgba(8, 27, 133, 1) 37%,
-    rgba(6, 62, 156, 1) 52%,
-    rgba(0, 212, 255, 1) 100%
-  );
+  background: linear-gradient(180deg, rgb(2, 0, 36) 0%, rgb(7 7 67) 20%, rgb(15, 24, 76) 37%, rgb(15, 34, 68) 52%, rgb(13, 57, 66) 100%);
   &-top {
     display: flex;
     justify-content: space-between;
@@ -81,6 +74,7 @@
                 border: none;
                 padding: 4px;
                 color: #585858;
+                border-radius: 4px;
             }
             button{
                 border: none;
