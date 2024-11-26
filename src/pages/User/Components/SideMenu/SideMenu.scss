@@ -16,18 +16,18 @@
             &:last-child{
                 border-bottom: 1px solid black;
             }
-            a{
+            span{
                 text-decoration: none;
                 font-size: 1.5rem;
                 font-weight: bold;
                 color: black;
+                cursor: pointer;
             }
         }
     }
 }
 
 @keyframes sideMenu {
-    // slide in
     0%{
         transform: translateX(-100%);
     }

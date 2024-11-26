@@ -2,18 +2,23 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import "./SideMenu.scss"
 
-export default function SideMenu() {
+export default function SideMenu({
+  isEnterStudentMarksOpen,
+  setIsEnterStudentMarksOpen,
+}) {
   return (
     <div className='side-menu'>
       <ul>
         <li>
-            <Link to="">Enter Student's Marks</Link>
+            <span
+              onClick={()=>setIsEnterStudentMarksOpen(!isEnterStudentMarksOpen)}
+            >Enter Student's Marks</span>
         </li>
         <li>
-            <Link to="">Mail Templates</Link>
+            <span>Mail Templates</span>
         </li>
         <li>
-            <Link to="">View Student's Details</Link>
+            <span>View Student's Details</span>
         </li>
       </ul>
     </div>

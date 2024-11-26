@@ -3,9 +3,11 @@ import Navbar from "../Components/Navbar/index.page";
 import { ReactComponent as AutoAcadLogo } from "../../../assets/Logo/AutoAcadLogo.svg";
 import "./Dashboard.scss";
 import SideMenu from "../Components/SideMenu/index.page";
+import EnterStudentMarks from "../EnterStudentMarks/index.page";
 
 export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen]=useState(false);
+  const [isEnterStudentMarksOpen, setIsEnterStudentMarksOpen]=useState(false);
   return (
     <div className="dashboard">
       <Navbar />
@@ -18,9 +20,17 @@ export default function Dashboard() {
           <span>MENU</span>
         </button>
         {isMenuOpen && (
-          <SideMenu/>
+          <SideMenu
+            isEnterStudentMarksOpen={isEnterStudentMarksOpen}
+            setIsEnterStudentMarksOpen={setIsEnterStudentMarksOpen}
+          />
         )}
         <AutoAcadLogo className="dashboard-logo" />
+        <div>
+          {isEnterStudentMarksOpen && (
+            <EnterStudentMarks/>
+          )}
+        </div>
       </div>
     </div>
   );
