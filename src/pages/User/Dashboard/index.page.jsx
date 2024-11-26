@@ -9,6 +9,7 @@ export default function Dashboard() {
       <Navbar/>
       <div className='dashboard-main'>
         <AutoAcadLogo className='dashboard-logo'/>
+        Dash
       </div>
     </div>
   )
