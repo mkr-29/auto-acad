@@ -8,7 +8,10 @@ export default function SideMenu({
   isEnterStudentMarksOpen,
   setIsEnterStudentMarksOpen,
   isViewStudentDetailsOpen,
-  setIsViewStudentDetailsOpen
+  setIsViewStudentDetailsOpen,
+  isVewStudentOpen,
+  setIsViewStudentOpen,
+
 }) {
   return (
     <div className='side-menu'>
@@ -19,6 +22,7 @@ export default function SideMenu({
                 setIsEnterStudentMarksOpen(!isEnterStudentMarksOpen)
                 setIsViewStudentDetailsOpen(false)
                 setIsMenuOpen(!isMenuOpen)
+                setIsViewStudentOpen(false)
               }}
             >Enter Student's Marks</span>
         </li>
@@ -31,6 +35,7 @@ export default function SideMenu({
                 setIsViewStudentDetailsOpen(!isViewStudentDetailsOpen)
                 setIsEnterStudentMarksOpen(false)
                 setIsMenuOpen(!isMenuOpen)
+                setIsViewStudentOpen(false)
               }}
             >View Student's Details</span>
         </li>

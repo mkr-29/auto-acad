@@ -31,6 +31,8 @@ export default function Dashboard() {
             setIsEnterStudentMarksOpen={setIsEnterStudentMarksOpen}
             isViewStudentDetailsOpen={isViewStudentDetailsOpen}
             setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
+            isVewStudentOpen={isViewStudentOpen}
+            setIsViewStudentOpen={setIsViewStudentOpen}
           />
         )}
         <AutoAcadLogo className="dashboard-logo" />

@@ -1,10 +1,14 @@
-.enter-student-marks h2{
-    margin-top: 40px;
-    color: white;
-    font-weight: 600;
-    font-style: inherit;
-    display: flex;
-    justify-content: center;
+.enter-student-marks{
+    padding-top: 3rem;
+    h2{
+        margin-top: 40px;
+        color: white;
+        font-weight: bold;
+        font-size: 2rem;
+        font-style: inherit;
+        display: flex;
+        justify-content: center;
+    }
 }
 .box{
     display: flex;
