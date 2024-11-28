@@ -1,0 +1,33 @@
+.enter-student-marks h2{
+    // position: absolute;
+    // left: 704px;
+    // top: 100px;
+    margin-top: 40px;
+    color: white;
+    font-weight: 600;
+    font-style: inherit;
+    display: flex;
+    justify-content: center;
+}
+
+.box{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap: 80px;
+    row-gap: 300px;
+    margin-top: 320px;
+    // position: absolute;
+    // bottom: 114px;
+    // left: 38%;  
+}
+
+.enter-marks{
+    width: 260px;
+    padding: 12px 0px;
+    border-radius: 10px;
+    background-color: rgb(216, 219, 223);
+    font-size: 19px;
+    font-weight: 600;
+    cursor: pointer;
+}

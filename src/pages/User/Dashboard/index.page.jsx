@@ -8,6 +8,7 @@ import EnterStudentMarks from "../EnterStudentMarks/index.page";
 export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen]=useState(false);
   const [isEnterStudentMarksOpen, setIsEnterStudentMarksOpen]=useState(false);
+  
   return (
     <div className="dashboard">
       <Navbar />
@@ -26,7 +27,7 @@ export default function Dashboard() {
           />
         )}
         <AutoAcadLogo className="dashboard-logo" />
-        <div>
+        <div style={{zIndex: "10", width: "78%", height: "100%"}}>
           {isEnterStudentMarksOpen && (
             <EnterStudentMarks/>
           )}
