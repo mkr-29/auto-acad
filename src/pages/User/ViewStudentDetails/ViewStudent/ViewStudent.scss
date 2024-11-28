@@ -1,0 +1,100 @@
+.view-student{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    &-heading{
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 1rem;
+        color: white;
+    }
+    &-back{
+        position: absolute;
+        right: 1rem;
+        top: 1rem;
+        color: white;
+        font-size: 26px;
+        cursor: pointer;
+    }
+    &-personal{
+        &-details{
+            display: flex;
+            justify-content: space-around;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+            &-left{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+                width: auto;
+            }
+        }
+        &-detail{
+            display: flex;
+            align-items: center;
+            width: 100%;
+            gap: 1rem;
+            label{
+                color: white;
+                font-weight: 600;
+                font-size: 22px;
+            }
+            span{
+                color: white;
+                font-size: 20px;
+            }
+            &-sg{
+                display: flex;
+                flex-direction: column;
+                &-p{
+                    label{
+                        font-size: 22px;
+                        color: white;
+                        font-weight: 600;
+                    }
+                    span{
+                        font-size: 20px;
+                        color: white;
+                    }
+                }
+            }
+            &-sgs{
+                color: white;
+                text-decoration: underline;
+                cursor: pointer;
+                width: 100%;
+                text-align: right;
+            }
+            &-academics{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin-top: 3rem;
+            }
+        }
+    }
+    &-send-mail{
+        display: flex;
+        justify-content: center;
+        margin-top: 3rem;
+        &-in{
+            width: 80%;
+            background-color: #3E6EB4;
+            border-radius: 10px;
+            padding: 1rem;
+            p{
+                font-size: 22px;
+                font-weight: 500;
+                color: white;
+                margin-top: 0;
+            }
+            &-buttons{
+                display: flex;
+                justify-content: center;
+                gap: 3rem;
+            }
+        }
+    }
+}

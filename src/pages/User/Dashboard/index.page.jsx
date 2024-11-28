@@ -4,11 +4,14 @@ import { ReactComponent as AutoAcadLogo } from "../../../assets/Logo/AutoAcadLog
 import "./Dashboard.scss";
 import SideMenu from "../Components/SideMenu/index.page";
 import EnterStudentMarks from "../EnterStudentMarks/index.page";
+import ViewStudentDetails from "../ViewStudentDetails/index.page";
+import ViewStudent from "../ViewStudentDetails/ViewStudent/index.page";
 
 export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen]=useState(false);
   const [isEnterStudentMarksOpen, setIsEnterStudentMarksOpen]=useState(false);
-  
+  const [isViewStudentDetailsOpen, setIsViewStudentDetailsOpen]=useState(false);
+  const [isViewStudentOpen, setIsViewStudentOpen]=useState(false);
   return (
     <div className="dashboard">
       <Navbar />
@@ -22,14 +25,34 @@ export default function Dashboard() {
         </button>
         {isMenuOpen && (
           <SideMenu
+            isMenuOpen={isMenuOpen}
+            setIsMenuOpen={setIsMenuOpen}
             isEnterStudentMarksOpen={isEnterStudentMarksOpen}
             setIsEnterStudentMarksOpen={setIsEnterStudentMarksOpen}
+            isViewStudentDetailsOpen={isViewStudentDetailsOpen}
+            setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
           />
         )}
         <AutoAcadLogo className="dashboard-logo" />
-        <div style={{zIndex: "10", width: "78%", height: "100%"}}>
+        <div className="dashboard-screens">
           {isEnterStudentMarksOpen && (
             <EnterStudentMarks/>
+          )}
+          {isViewStudentDetailsOpen && (
+            <ViewStudentDetails
+              isViewStudentDetailsOpen={isViewStudentDetailsOpen}
+              setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
+              isViewStudentOpen={isViewStudentOpen}
+              setIsViewStudentOpen={setIsViewStudentOpen}
+            />
+          )}
+          {isViewStudentOpen && (
+            <ViewStudent
+              isViewStudentOpen={isViewStudentOpen}
+              setIsViewStudentOpen={setIsViewStudentOpen}
+              isViewStudentDetailsOpen={isViewStudentDetailsOpen}
+              setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
+            />
           )}
         </div>
       </div>

@@ -1,0 +1,17 @@
+.view-student-details{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    gap: 20rem;
+    padding-top: 3rem;
+    &-heading{
+        color: white;
+        font-size: 2rem;
+    }
+    &-buttons{
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        z-index: 2;
+    }
+}
