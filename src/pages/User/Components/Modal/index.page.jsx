@@ -8,6 +8,7 @@ export default function Modal({
   title,
   content,
   primaryButton,
+  onCancel,
 }) {
   return (
     <div className="modal">
@@ -16,7 +17,10 @@ export default function Modal({
           <h3 className="modal-header-title">{title}</h3>
           <button
             className="modal-header-close"
-            onClick={() => setIsModalOpen(false)}
+            onClick={() => {
+              setIsModalOpen(false);
+              if (onCancel) onCancel();
+            }}
           >
             <IoClose />
           </button>
@@ -31,7 +35,10 @@ export default function Modal({
           </button>
           <button
             className="modal-footer-button"
-            onClick={() => setIsModalOpen(false)}
+            onClick={() => {
+              setIsModalOpen(false);
+              if (onCancel) onCancel();
+            }}
           >
             Cancel
           </button>

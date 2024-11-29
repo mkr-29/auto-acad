@@ -9,9 +9,10 @@ export default function SideMenu({
   setIsEnterStudentMarksOpen,
   isViewStudentDetailsOpen,
   setIsViewStudentDetailsOpen,
-  isVewStudentOpen,
+  // isVewStudentOpen,
   setIsViewStudentOpen,
-
+  // isViewBatchDetailsOpen,
+  setIsViewBatchDetailsOpen
 }) {
   return (
     <div className='side-menu'>
@@ -23,6 +24,7 @@ export default function SideMenu({
                 setIsViewStudentDetailsOpen(false)
                 setIsMenuOpen(!isMenuOpen)
                 setIsViewStudentOpen(false)
+                setIsViewBatchDetailsOpen(false)
               }}
             >Enter Student's Marks</span>
         </li>
@@ -36,6 +38,7 @@ export default function SideMenu({
                 setIsEnterStudentMarksOpen(false)
                 setIsMenuOpen(!isMenuOpen)
                 setIsViewStudentOpen(false)
+                setIsViewBatchDetailsOpen(false)
               }}
             >View Student's Details</span>
         </li>

@@ -6,12 +6,14 @@ import SideMenu from "../Components/SideMenu/index.page";
 import EnterStudentMarks from "../EnterStudentMarks/index.page";
 import ViewStudentDetails from "../ViewStudentDetails/index.page";
 import ViewStudent from "../ViewStudentDetails/ViewStudent/index.page";
+import ViewBatchDetails from "../ViewBatchDetails/index.page";
 
 export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen]=useState(false);
   const [isEnterStudentMarksOpen, setIsEnterStudentMarksOpen]=useState(false);
   const [isViewStudentDetailsOpen, setIsViewStudentDetailsOpen]=useState(false);
   const [isViewStudentOpen, setIsViewStudentOpen]=useState(false);
+  const [isViewBatchDetailsOpen, setIsViewBatchDetailsOpen]=useState(false);
   return (
     <div className="dashboard">
       <Navbar />
@@ -33,6 +35,8 @@ export default function Dashboard() {
             setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
             isVewStudentOpen={isViewStudentOpen}
             setIsViewStudentOpen={setIsViewStudentOpen}
+            isViewBatchDetailsOpen={isViewBatchDetailsOpen}
+            setIsViewBatchDetailsOpen={setIsViewBatchDetailsOpen}
           />
         )}
         <AutoAcadLogo className="dashboard-logo" />
@@ -46,6 +50,8 @@ export default function Dashboard() {
               setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
               isViewStudentOpen={isViewStudentOpen}
               setIsViewStudentOpen={setIsViewStudentOpen}
+              isViewBatchDetailsOpen={isViewBatchDetailsOpen}
+              setIsViewBatchDetailsOpen={setIsViewBatchDetailsOpen}
             />
           )}
           {isViewStudentOpen && (
@@ -54,6 +60,11 @@ export default function Dashboard() {
               setIsViewStudentOpen={setIsViewStudentOpen}
               isViewStudentDetailsOpen={isViewStudentDetailsOpen}
               setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
+            />
+          )}
+          {isViewBatchDetailsOpen && (
+            <ViewBatchDetails
+              
             />
           )}
         </div>

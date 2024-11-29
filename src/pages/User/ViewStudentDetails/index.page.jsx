@@ -4,12 +4,15 @@ import PrimaryButton from '../Components/PrimaryButton/index.page'
 import Modal from '../Components/Modal/index.page';
 
 export default function ViewStudentDetails({
-    isViewStudentDetailsOpen,
+    // isViewStudentDetailsOpen,
     setIsViewStudentDetailsOpen,
     // isViewStudentOpen,
-    setIsViewStudentOpen
+    setIsViewStudentOpen,
+    // isViewBatchDetailsOpen,
+    setIsViewBatchDetailsOpen
 }) {
   const [isStudentRollModalOpen, setIsStudentRollModalOpen]=useState(false);
+  const [isBatchModalOpen, setIsBatchModalOpen]=useState(false);
   return (
     <div className='view-student-details'>
       <h3 className='view-student-details-heading'>View Student's Details</h3>
@@ -24,7 +27,9 @@ export default function ViewStudentDetails({
         />
         <PrimaryButton
             text={`View Batch Details`}
-            onClick={()=>{}}
+            onClick={()=>{
+              setIsBatchModalOpen(!isBatchModalOpen)
+            }}
         />
       </div>
       {isStudentRollModalOpen && (
@@ -44,6 +49,27 @@ export default function ViewStudentDetails({
               setIsStudentRollModalOpen(false)
               setIsViewStudentDetailsOpen(false)
               setIsViewStudentOpen(true)
+            }
+          }}
+        />
+      )}
+      {isBatchModalOpen && (
+        <Modal
+          isModalOpen={isBatchModalOpen}
+          setIsModalOpen={setIsBatchModalOpen}
+          title={`Enter Batch Number`}
+          content={
+            <div>
+              <label>BATCH NUMBER: </label>
+              <input type="text"/>
+            </div>
+          }
+          primaryButton={{
+            text: "Search",
+            onClick: ()=>{
+              setIsBatchModalOpen(false)
+              setIsViewStudentDetailsOpen(false)
+              setIsViewBatchDetailsOpen(true)
             }
           }}
         />
