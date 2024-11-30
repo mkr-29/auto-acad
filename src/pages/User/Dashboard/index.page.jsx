@@ -6,12 +6,14 @@ import SideMenu from "../Components/SideMenu/index.page";
 import EnterStudentMarks from "../EnterStudentMarks/index.page";
 import ViewStudentDetails from "../ViewStudentDetails/index.page";
 import ViewStudent from "../ViewStudentDetails/ViewStudent/index.page";
+import MainTemplate from "../MainTemplate/index.page";
 
 export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen]=useState(false);
   const [isEnterStudentMarksOpen, setIsEnterStudentMarksOpen]=useState(false);
   const [isViewStudentDetailsOpen, setIsViewStudentDetailsOpen]=useState(false);
   const [isViewStudentOpen, setIsViewStudentOpen]=useState(false);
+  const [isMainTemplateOpen, setIsMainTemplateOpen]=useState(false);
   return (
     <div className="dashboard">
       <Navbar />
@@ -33,6 +35,8 @@ export default function Dashboard() {
             setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
             isVewStudentOpen={isViewStudentOpen}
             setIsViewStudentOpen={setIsViewStudentOpen}
+            isMainTemplateOpen={isMainTemplateOpen}
+            setIsMainTemplateOpen={setIsMainTemplateOpen}
           />
         )}
         <AutoAcadLogo className="dashboard-logo" />
@@ -56,6 +60,13 @@ export default function Dashboard() {
               setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
             />
           )}
+          {isMainTemplateOpen && (
+            <MainTemplate
+              isMainTemplateOpen={isMainTemplateOpen}
+              setIsMainTemplateOpen={setIsMainTemplateOpen}
+            />
+          )
+          }
         </div>
       </div>
     </div>

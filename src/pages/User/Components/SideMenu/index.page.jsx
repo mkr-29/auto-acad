@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom'
 import "./SideMenu.scss"
 
 export default function SideMenu({
+  
   isMenuOpen,
   setIsMenuOpen,
   isEnterStudentMarksOpen,
   setIsEnterStudentMarksOpen,
+
+  isMainTemplateOpen,
+  setIsMainTemplateOpen,
+  
   isViewStudentDetailsOpen,
   setIsViewStudentDetailsOpen,
-  isVewStudentOpen,
+  isViewStudentOpen,
   setIsViewStudentOpen,
 
 }) {
@@ -27,7 +32,14 @@ export default function SideMenu({
             >Enter Student's Marks</span>
         </li>
         <li>
-            <span>Mail Templates</span>
+            <span
+              onClick={()=>{
+                setIsMainTemplateOpen(!isMainTemplateOpen)
+                setIsEnterStudentMarksOpen(false)
+                setIsMenuOpen(!isMenuOpen)
+                setIsViewStudentOpen(false)
+              }}
+            >Mail Templates</span>
         </li>
         <li>
             <span

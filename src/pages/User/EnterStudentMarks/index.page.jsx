@@ -15,7 +15,7 @@ export default function EnterStudentMarks() {
           text="Enter Marks Using CSV File"
           onClick={()=>{}}
         />
-      </div>  
+      </div>
     </div>
   )
 }

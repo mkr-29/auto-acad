@@ -1,0 +1,95 @@
+.main-template {
+  display: flex-column;
+  justify-items: center;
+  color: #fff;
+}
+
+.main-template h2 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.template-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.8);
+  width: 70%;
+  height: 40px;
+  position: relative;
+}
+
+.short-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 190px;
+  gap: 20px;
+}
+
+.menu-handle {
+  font-size: 1.5rem;
+  color: #fff;
+  opacity: 0.8;
+}
+
+.template-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.menu-button {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0.7;
+  padding: 0;
+}
+
+.menu-button:hover {
+  opacity: 1;
+}
+
+.add-template{
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.template-item :hover .menu {
+  display: block;
+}
+
+.menu {
+  list-style: none;
+  padding: 5px;
+  margin: 0;
+  background-color: white;
+  color: black;
+  border-radius: 6px;
+  position: absolute;
+  top: 100%;
+  right: 10px;
+  display: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+}
+
+.menu li {
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.menu li:hover {
+  background-color: #f0f0f0;
+}
