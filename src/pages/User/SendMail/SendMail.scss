@@ -1,0 +1,59 @@
+.mail-preview{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #0B2F9F;
+    padding: 2rem 0;
+    gap: 1rem;
+    &-box{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 80%;
+        background-color: #98DED9;
+        border-radius: 15px;
+        padding: 1rem;
+    }
+    &-heading{
+        color: white;
+        font-size: 26px;
+        font-weight: 600;
+        margin-top: 0;
+    }
+    &-header{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        span{
+            color: rgb(119, 119, 119);
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        h3{
+            color: #0B2F9F;
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-top: 0.3rem;
+        }
+    }
+    &-body{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        span{
+            color: rgb(119, 119, 119);
+            font-size: 18px;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+        p{
+            color: #0B2F9F;
+            font-size: 20px;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-top: 0.3rem;
+        }
+    }
+}

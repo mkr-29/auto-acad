@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import "./SideMenu.scss"
 
 export default function SideMenu({
@@ -20,11 +19,13 @@ export default function SideMenu({
         <li>
             <span
               onClick={()=>{
-                setIsEnterStudentMarksOpen(!isEnterStudentMarksOpen)
-                setIsViewStudentDetailsOpen(false)
-                setIsMenuOpen(!isMenuOpen)
-                setIsViewStudentOpen(false)
-                setIsViewBatchDetailsOpen(false)
+                setIsEnterStudentMarksOpen(!isEnterStudentMarksOpen);
+                setIsViewStudentDetailsOpen(false);
+                setIsMenuOpen(!isMenuOpen);
+                setIsViewStudentOpen(false);
+                setIsViewBatchDetailsOpen(false);
+                // url to be /user/dashboard
+                window.location.href = '/user/dashboard'
               }}
             >Enter Student's Marks</span>
         </li>

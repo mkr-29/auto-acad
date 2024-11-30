@@ -1,0 +1,13 @@
+[
+    {
+      "templateId": "template1",
+      "subject": "Regarding your ward Performance",
+      "body": "Dear Parent, Your ward has scored 90% in the recent exam. Keep up the good work."
+    },
+    {
+      "templateId": "template2",
+      "subject": "Meeting Reminder",
+      "body": "Dear Parent, A meeting is scheduled for next week. Please attend."
+    }
+  ]
+  
