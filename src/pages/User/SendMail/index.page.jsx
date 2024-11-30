@@ -7,8 +7,8 @@ import "./SendMail.scss";
 import PrimaryButton from "../Components/PrimaryButton/index.page";
 
 export default function SendMail({ selectedTemplate = "template1" }) {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [message, setMessage] = useState("");
 
   const mailToRender = MailsJson.find(
     (mail) => mail.templateId === selectedTemplate
