@@ -1,9 +1,9 @@
 import React from "react";
-import Navbar from "../Components/Navbar/index.page";
 import { ReactComponent as AutoAcadLogo } from "../../../assets/Logo/AutoAcadLogo.svg";
 import "./Home.scss";
-import About from "../Components/About/index.page";
-import Footer from "../Components/Footer/index.page";
+import Navbar from "../../../Components/Navbar/index.page";
+import About from "../components/About/index.page";
+import Footer from "../../../Components/Footer/index.page";
 
 export default function Home() {
   return (
@@ -17,7 +17,7 @@ export default function Home() {
         </div>
       </div>
       <About />
-      <Footer/>
+      <Footer />
     </div>
   );
 }

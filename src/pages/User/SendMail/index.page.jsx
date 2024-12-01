@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Navbar from "../Components/Navbar/index.page";
-import Footer from "../Components/Footer/index.page";
 // import nodemailer from 'nodemailer';
 import MailsJson from "./mailTemplates.json";
 import "./SendMail.scss";
-import PrimaryButton from "../Components/PrimaryButton/index.page";
+import Navbar from "../../../Components/Navbar/index.page";
+import PrimaryButton from "../../../Components/PrimaryButton/index.page";
+import Footer from "../../../Components/Footer/index.page";
 
 export default function SendMail({ selectedTemplate = "template1" }) {
 //   const [email, setEmail] = useState("");

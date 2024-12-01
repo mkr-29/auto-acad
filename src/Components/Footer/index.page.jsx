@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.scss";
-import {ReactComponent as AutoAcadLogo} from "../../../../assets/Logo/AutoAcadLogo.svg";
+import {ReactComponent as AutoAcadLogo} from "../../assets/Logo/AutoAcadLogo.svg";
 
 export default function Footer() {
   return (

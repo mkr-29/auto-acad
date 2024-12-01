@@ -1,5 +1,5 @@
 import React from "react";
-import { ReactComponent as AutoAcadLogo } from "../../../../assets/Logo/AutoAcadLogo.svg";
+import { ReactComponent as AutoAcadLogo } from "../../assets/Logo/AutoAcadLogo.svg";
 import "./Navbar.scss";
 import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";

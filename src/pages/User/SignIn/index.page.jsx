@@ -1,7 +1,7 @@
 import React from "react";
 import "./SignIn.scss";
-import Navbar from "../Components/Navbar/index.page";
 import { Link } from "react-router-dom";
+import Navbar from "../../../Components/Navbar/index.page";
 
 export default function SignIn() {
   return (

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import Table from "../Components/Table/index.page";
 import "./ViewBatchDetails.scss";
 import { MdFilterAlt } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
-import Modal from "../Components/Modal/index.page";
-import Popover from "../Components/Popover/index.page";
 import { Link } from "react-router-dom";
+import Popover from "../../../Components/Popover/index.page";
+import Modal from "../../../Components/Modal/index.page";
+import Table from "../../../Components/Table/index.page";
 
 export default function ViewBatchDetails() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -172,7 +172,7 @@ export default function ViewBatchDetails() {
           className="view-batch-filter"
           onClick={() => setIsFilterOpen(!isFilterOpen)}
         />
-        <Popover 
+        <Popover
           icon={<FiMenu />}
           content={
             <div className="view-batch-menu-content">

@@ -1,6 +1,6 @@
 import React from 'react'
 import "./studentMarks.scss";
-import PrimaryButton from '../Components/PrimaryButton/index.page';
+import PrimaryButton from '../../../Components/PrimaryButton/index.page';
 
 export default function EnterStudentMarks() {
   return (

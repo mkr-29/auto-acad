@@ -1,13 +1,12 @@
 import React, { useState } from "react";
-import Navbar from "../Components/Navbar/index.page";
-import Footer from "../Components/Footer/index.page";
 import "./SendMailToStudent.scss";
-import SideMenu from "../Components/SideMenu/index.page";
 import { Link, useNavigate } from "react-router-dom";
-import PrimaryButton from "../Components/PrimaryButton/index.page";
-import SelectTemplate from "../Components/SelectTemplate/index.page";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { ReactComponent as AutoAcadLogo } from "../../../assets/Logo/AutoAcadLogo.svg";
+import Navbar from "../../../Components/Navbar/index.page";
+import PrimaryButton from "../../../Components/PrimaryButton/index.page";
+import SelectTemplate from "../../../Components/SelectTemplate/index.page";
+import Footer from "../../../Components/Footer/index.page";
 
 export default function SendMailToStudent() {
   const navigate = useNavigate();
@@ -22,12 +21,12 @@ export default function SendMailToStudent() {
         <Link to="/user/dashboard" className="send-mail-stu-back">
           <IoArrowBackCircleOutline />
         </Link>
-        <SelectTemplate 
+        <SelectTemplate
           selectedTemplate={selectedTemplate}
           setSelectedTemplate={setSelectedTemplate}
         />
         <div>
-          <PrimaryButton 
+          <PrimaryButton
             text="Send Mail"
             onClick={() => navigate("/user/mail")}
           />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import "./ViewStudentDetails.scss"
-import PrimaryButton from '../Components/PrimaryButton/index.page'
-import Modal from '../Components/Modal/index.page';
+import PrimaryButton from '../../../Components/PrimaryButton/index.page';
+import Modal from '../../../Components/Modal/index.page';
 
 export default function ViewStudentDetails({
     // isViewStudentDetailsOpen,
