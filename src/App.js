@@ -1,28 +1,26 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/User/Home/index.page";
-import SignIn from "./pages/User/SignIn/index.page";
-import Dashboard from "./pages/User/Dashboard/index.page";
-import SendMailToStudent from "./pages/User/SendMailToStudent/index.page";
-import SendMail from "./pages/User/SendMail/index.page";
-// import PrivateRoutes from "./routes/PrivateRoutes";
+import publicRoutes from "./routes/publicRoutes";
+import protectedRoutes from "./routes/protectedRoutes";
+import ProtectedRoute from "./Components/ProtectedRoute/index.page";
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/user/dashboard" element={<Dashboard />} />
-        <Route path="/user/send-mail-to-student" element={<SendMailToStudent />} />
-        <Route path="/user/mail" element={<SendMail />} />
-        {/* Private Routes */}
-        {/* <Route path="/user" element={<PrivateRoutes/>}>
-          <Route path="dashboard" element={<Dashboard/>} />
-        </Route> */}
-      </Routes>
-    </div>
+    <Routes>
+      {/* Render Public Routes */}
+      {publicRoutes.map(({ path, element }) => (
+        <Route key={path} path={path} element={element} />
+      ))}
+
+      {/* Render Protected Routes */}
+      {protectedRoutes.map(({ path, element }) => (
+        <Route
+          key={path}
+          path={path}
+          element={<ProtectedRoute>{element}</ProtectedRoute>}
+        />
+      ))}
+    </Routes>
   );
 }
 

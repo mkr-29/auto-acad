@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 // import nodemailer from 'nodemailer';
 import MailsJson from "./mailTemplates.json";
 import "./SendMail.scss";

@@ -1,7 +1,5 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import "./SelectTemplate.scss"
-import Popover from '../Popover/index.page'
-import { FiMenu } from "react-icons/fi";
 import SelectTemplateCard from './SelectTemplateCard/index.page';
 import { Link } from 'react-router-dom';
 
