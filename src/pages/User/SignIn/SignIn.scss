@@ -1,12 +1,11 @@
 .sign-in {
-  background-color: #0b2f9f;
-  height: 100vh;
-  position: relative;
+  // position: relative;
   &-box {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 100px);
+    height: auto;
+    padding: 2rem 0;
     &-inner {
       background-color: #98ded9;
       border-radius: 10px;
@@ -16,13 +15,14 @@
       padding: 2rem;
       width: 400px;
       position: relative;
+      gap: 0.5rem;
       h2 {
         color: #000;
         font-size: 2rem;
         margin: 0.5rem 0;
       }
-      a{
-        width: calc(100% - 1rem);
+      &-button{
+        width: 100%;
         background-color: #161D6F;
         border: none;
         border-radius: 4px;
@@ -31,6 +31,18 @@
         padding: 0.5rem;
         font-weight: 500;
         text-decoration: none;
+      }
+      &-sign-up{
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        font-size: 14px;
+        gap: 0.5rem;
+        a{
+          color: #000;
+          font-weight: bold;
+        }
       }
     }
     &-form {
@@ -53,6 +65,14 @@
         }
         input {
           width: calc(100% - 1rem);
+          padding: 0.5rem;
+          border: none;
+          border-radius: 4px;
+          background-color: #c7ffd8;
+          font-size: 1rem;
+        }
+        select{
+          width: 100%;
           padding: 0.5rem;
           border: none;
           border-radius: 4px;

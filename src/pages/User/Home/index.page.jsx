@@ -7,7 +7,7 @@ import Footer from "../../../Components/Footer/index.page";
 
 export default function Home() {
   return (
-    <div className="home">
+    <div className="home bgc">
       <Navbar />
       <div className="home-landing">
         <AutoAcadLogo className="home-logo" />
