@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.scss";
-import {ReactComponent as AutoAcadLogo} from "../../../../assets/Logo/AutoAcadLogo.svg";
+import {ReactComponent as AutoAcadLogo} from "../../assets/Logo/AutoAcadLogo.svg";
 
 export default function Footer() {
   return (
@@ -30,18 +30,18 @@ export default function Footer() {
             </div>
             <p>FOLLOW US</p>
             <div className="footer-bottom-right-subscribe-socials">
-              <a href="">
+              <span>
                 <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="">
+              </span>
+              <span>
                 <i className="fab fa-twitter"></i>
-              </a>
-              <a href="">
+              </span>
+              <span>
                 <i className="fab fa-instagram"></i>
-              </a>
-              <a href="">
+              </span>
+              <span>
                 <i className="fab fa-linkedin"></i>
-              </a>
+              </span>
             </div>
           </div>
         </div>

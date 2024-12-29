@@ -7,6 +7,7 @@
     position: sticky;
     top: 0;
     left: 0;
+    z-index: 1000;
     &-logo{
         width: 80px;
     }
@@ -18,9 +19,11 @@
         cursor: pointer;
         &-sign-in{
             border: 3px solid #98DED9;
+            background-color: transparent;
+            padding: 0 1rem;
             border-radius: 5px;
             color: #fff;
-            width: 5rem;
+            width: auto;
             height: 2rem;
             display: flex;
             align-items: center;
@@ -28,6 +31,7 @@
             text-decoration: none;
             font-weight: 500;
             font-size: 18px;
+            cursor: pointer;
         }
     }
     &-links{
@@ -35,5 +39,8 @@
         justify-content: space-between;
         align-items: center;
         width: 30%;
+        &-auth{
+            width: calc(100vw - 80%);
+        }
     }
 }

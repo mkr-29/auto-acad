@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import Navbar from "../Components/Navbar/index.page";
 import { ReactComponent as AutoAcadLogo } from "../../../assets/Logo/AutoAcadLogo.svg";
 import "./Dashboard.scss";
-import SideMenu from "../Components/SideMenu/index.page";
 import EnterStudentMarks from "../EnterStudentMarks/index.page";
 import ViewStudentDetails from "../ViewStudentDetails/index.page";
 import ViewStudent from "../ViewStudentDetails/ViewStudent/index.page";
 import ViewBatchDetails from "../ViewBatchDetails/index.page";
+import Navbar from "../../../Components/Navbar/index.page";
+import SideMenu from "../../../Components/SideMenu/index.page";
 
 export default function Dashboard() {
   const [isMenuOpen, setIsMenuOpen]=useState(false);

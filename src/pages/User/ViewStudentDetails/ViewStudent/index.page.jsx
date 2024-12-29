@@ -1,8 +1,8 @@
 import React from "react";
 import "./ViewStudent.scss";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import ViewStudentDetailCard from "../../Components/ViewStudentDetailCard/index.page";
-import PrimaryButton from "../../Components/PrimaryButton/index.page";
+import ViewStudentDetailCard from "../../../../Components/ViewStudentDetailCard/index.page";
+import PrimaryButton from "../../../../Components/PrimaryButton/index.page";
 
 export default function ViewStudent({
   isViewStudentOpen,
