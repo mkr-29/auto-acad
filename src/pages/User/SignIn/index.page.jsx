@@ -62,6 +62,8 @@ export default function SignIn() {
       });
   };
 
+  console.log("apibaseurl", process.env.API_BASE_URL);
+
   return (
     <div className="sign-in bgc">
       <Navbar />
