@@ -17,6 +17,11 @@
         font-family: 'Roboto', sans-serif;
         font-size: 18px;
         cursor: pointer;
+        &-active{
+            color: #98DED9;
+            text-decoration: underline;
+            font-weight: 600;
+        }
         &-sign-in{
             border: 3px solid #98DED9;
             background-color: transparent;
