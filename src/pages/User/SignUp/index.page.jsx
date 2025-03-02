@@ -1,11 +1,10 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-import axios from "axios";
 import Navbar from "../../../Components/Navbar/index.page";
 import Footer from "../../../Components/Footer/index.page";
 import AuthContext from "../../../context/AuthContext";
-import { apiRoutes } from "../Routes/apiRoutes";
+import { UserServices } from "../Services/UserServices";
 
 export default function SignUp() {
   const [loading, setLoading] = useState(false);
@@ -20,9 +19,13 @@ export default function SignUp() {
       confirmPassword: "",
       role: "mentor",
     },
+    onSubmit: () => {
+      handleSubmit();
+      formik.resetForm();
+    },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (formik.values.password !== formik.values.confirmPassword) {
       alert("Password and Confirm Password should be same");
       return;
@@ -36,37 +39,36 @@ export default function SignUp() {
 
     setLoading(true);
 
-    axios
-      .post(apiRoutes.register, data)
-      .then((response) => {
-        console.log("Response:", response.data);
+    try {
+      const response = await UserServices.register(data);
+
+      if (response.status >= 400) {
+        throw new Error(response.message);
+      } else {
         const userData = {
-          userId: response.data.data.user.userId,
-          name: response.data.data.user.name,
-          email: response.data.data.user.email,
+          userId: response.data.user.userId,
+          name: response.data.user.name,
+          email: response.data.user.email,
         };
         // Login the user
         const { token, user } = {
-          token: response.data.data.token,
+          token: response.data.token,
           user: userData,
         };
         login(token, user); // Save token and navigate to dashboard
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.error("Error Response:", error.response.data);
-          alert(
-            `Error: ${error.response.status} - ${
-              error.response.data.message || "Unauthorized"
-            }`
-          );
-        } else {
-          console.error("Error Message:", error.message);
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
+      }
+    } catch (error) {
+      if (error.response) {
+        console.error("Error Response:", error.response.data);
+        alert(
+          `Error: ${error.response.status} - ${
+            error.response.data.message || "Unauthorized"
+          }`
+        );
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -143,7 +145,7 @@ export default function SignUp() {
             <button
               type="button"
               className="sign-in-box-inner-button"
-              onClick={handleSubmit}
+              onClick={formik.handleSubmit}
               disabled={loading}
             >
               {loading ? "Submitting..." : "SUBMIT"}

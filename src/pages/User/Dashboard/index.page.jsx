@@ -1,19 +1,19 @@
 import React, { useState } from "react";
 import { ReactComponent as AutoAcadLogo } from "../../../assets/Logo/AutoAcadLogo.svg";
 import "./Dashboard.scss";
-import EnterStudentMarks from "../EnterStudentMarks/index.page";
-import ViewStudentDetails from "../ViewStudentDetails/index.page";
-import ViewStudent from "../ViewStudentDetails/ViewStudent/index.page";
-import ViewBatchDetails from "../ViewBatchDetails/index.page";
+// import EnterStudentMarks from "../EnterStudentMarks/index.page";
+// import ViewStudentDetails from "../ViewStudentDetails/index.page";
+// import ViewStudent from "../ViewStudentDetails/ViewStudent/index.page";
+// import ViewBatchDetails from "../ViewBatchDetails/index.page";
 import Navbar from "../../../Components/Navbar/index.page";
 import SideMenu from "../../../Components/SideMenu/index.page";
 
-export default function Dashboard() {
+export default function Dashboard({children}) {
   const [isMenuOpen, setIsMenuOpen]=useState(false);
-  const [isEnterStudentMarksOpen, setIsEnterStudentMarksOpen]=useState(false);
-  const [isViewStudentDetailsOpen, setIsViewStudentDetailsOpen]=useState(false);
-  const [isViewStudentOpen, setIsViewStudentOpen]=useState(false);
-  const [isViewBatchDetailsOpen, setIsViewBatchDetailsOpen]=useState(false);
+  // const [isEnterStudentMarksOpen, setIsEnterStudentMarksOpen]=useState(false);
+  // const [isViewStudentDetailsOpen, setIsViewStudentDetailsOpen]=useState(false);
+  // const [isViewStudentOpen, setIsViewStudentOpen]=useState(false);
+  // const [isViewBatchDetailsOpen, setIsViewBatchDetailsOpen]=useState(false);
   return (
     <div className="dashboard">
       <Navbar />
@@ -29,19 +29,20 @@ export default function Dashboard() {
           <SideMenu
             isMenuOpen={isMenuOpen}
             setIsMenuOpen={setIsMenuOpen}
-            isEnterStudentMarksOpen={isEnterStudentMarksOpen}
-            setIsEnterStudentMarksOpen={setIsEnterStudentMarksOpen}
-            isViewStudentDetailsOpen={isViewStudentDetailsOpen}
-            setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
-            isVewStudentOpen={isViewStudentOpen}
-            setIsViewStudentOpen={setIsViewStudentOpen}
-            isViewBatchDetailsOpen={isViewBatchDetailsOpen}
-            setIsViewBatchDetailsOpen={setIsViewBatchDetailsOpen}
+            // isEnterStudentMarksOpen={isEnterStudentMarksOpen}
+            // setIsEnterStudentMarksOpen={setIsEnterStudentMarksOpen}
+            // isViewStudentDetailsOpen={isViewStudentDetailsOpen}
+            // setIsViewStudentDetailsOpen={setIsViewStudentDetailsOpen}
+            // isVewStudentOpen={isViewStudentOpen}
+            // setIsViewStudentOpen={setIsViewStudentOpen}
+            // isViewBatchDetailsOpen={isViewBatchDetailsOpen}
+            // setIsViewBatchDetailsOpen={setIsViewBatchDetailsOpen}
           />
         )}
         <AutoAcadLogo className="dashboard-logo" />
         <div className="dashboard-screens">
-          {isEnterStudentMarksOpen && (
+          {children}
+          {/* {isEnterStudentMarksOpen && (
             <EnterStudentMarks/>
           )}
           {isViewStudentDetailsOpen && (
@@ -66,7 +67,7 @@ export default function Dashboard() {
             <ViewBatchDetails
               
             />
-          )}
+          )} */}
         </div>
       </div>
     </div>

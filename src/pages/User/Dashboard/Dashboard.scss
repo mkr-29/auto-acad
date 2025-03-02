@@ -1,13 +1,27 @@
+@import "../Styles/variables";
+
 .dashboard{
-    background-color: #0b2f9f;
+    background-color: $secondaryColor;
     height: 100vh;
     display: flex;
     flex-direction: column;
+    position: relative;
     &-main{
         display: flex;
         align-items: flex-start;
         justify-content: flex-start;
         height: 100%;
+        overflow: auto;
+        &::-webkit-scrollbar{
+            width: 0.5rem;
+        }
+        &::-webkit-scrollbar-thumb{
+            background-color: $quaternaryColor;
+            border-radius: 5px;
+        }
+        &::-webkit-scrollbar-track{
+            background-color: $secondaryColor;
+        }
     }
     &-logo{
         width: 400px;
@@ -27,21 +41,31 @@
         border: none;
         gap: 0.5rem;
         font-size: 1.5rem;
-        color: #fff;
+        color: $quinaryColor;
         margin: 1rem;
         cursor: pointer;
         &-open{
             i{
-                color: black;
+                color: $primaryColor;
             }
             span{
                 font-weight: bold;
-                color: black;
+                color: $primaryColor;
             }
         }
     }
     &-screens{
         width: 100%;
         height: 100%;
+        position: relative;
+    }
+}
+.primary-button{
+    background-color: $quinaryColor;
+    text-decoration: none;
+    color: $primaryColor;
+    cursor: pointer;
+    &:hover{
+        background-color: $quinaryColor;
     }
 }

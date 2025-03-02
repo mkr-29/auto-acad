@@ -1,5 +1,7 @@
+@import "../../pages/User/Styles/variables";
+
 .side-menu{
-    background-color: #98DED9;
+    background-color: $quaternaryColor;
     display: flex;
     height: 100%;
     animation: sideMenu 0.5s ease-in-out;
@@ -12,16 +14,16 @@
         padding: 0;
         li{
             padding: 0.7rem 1.4rem;
-            border-top: 1px solid black;
+            border-top: 1px solid $primaryColor;
             display: flex;
             &:last-child{
-                border-bottom: 1px solid black;
+                border-bottom: 1px solid $primaryColor;
             }
-            span{
+            a{
                 text-decoration: none;
                 font-size: 18px;
                 font-weight: bold;
-                color: black;
+                color: $primaryColor;
                 cursor: pointer;
             }
         }

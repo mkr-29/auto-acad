@@ -1,0 +1,31 @@
+$theme1PrimaryColor: #2c3930;
+$theme1SecondaryColor: #3f4f44;
+$theme1TertiaryColor: #a27b5c;
+$theme1QuaternaryColor: #dcd7c9;
+
+$theme2PrimaryColor: #1e201e;
+$theme2SecondaryColor: #3c3d37;
+$theme2TertiaryColor: #697565;
+$theme2QuaternaryColor: #ecdfcc;
+
+$theme3PrimaryColor: #01161e;
+$theme3SecondaryColor: #124559;
+$theme3TertiaryColor: #598392;
+$theme3QuaternaryColor: #aec3b0;
+$theme3QuinaryColor: #eff6e0;
+
+$theme4PrimaryColor: #fcba04;
+$theme4SecondaryColor: #a50104;
+$theme4TertiaryColor: #590004;
+$theme4QuaternaryColor: #250001;
+$theme4QuinaryColor: #f3f3f3;
+
+$theme: 3;
+
+$primaryColor: $theme3PrimaryColor;
+$secondaryColor: $theme3SecondaryColor;
+$tertiaryColor: $theme3TertiaryColor;
+$quaternaryColor: $theme3QuaternaryColor;
+$quinaryColor: $theme3QuinaryColor;
+
+$fontFamily: "Inter", sans-serif;

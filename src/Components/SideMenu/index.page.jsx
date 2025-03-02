@@ -1,49 +1,49 @@
-import React from 'react'
-import "./SideMenu.scss"
+import React from "react";
+import "./SideMenu.scss";
+import { Link } from "react-router-dom";
+import { userRoutes } from "../../routes/appRoutes";
 
 export default function SideMenu({
   isMenuOpen,
   setIsMenuOpen,
-  isEnterStudentMarksOpen,
-  setIsEnterStudentMarksOpen,
-  isViewStudentDetailsOpen,
-  setIsViewStudentDetailsOpen,
-  // isVewStudentOpen,
-  setIsViewStudentOpen,
-  // isViewBatchDetailsOpen,
-  setIsViewBatchDetailsOpen
 }) {
   return (
-    <div className='side-menu'>
+    <div className="side-menu">
       <ul>
         <li>
-            <span
-              onClick={()=>{
-                setIsEnterStudentMarksOpen(!isEnterStudentMarksOpen);
-                setIsViewStudentDetailsOpen(false);
-                setIsMenuOpen(!isMenuOpen);
-                setIsViewStudentOpen(false);
-                setIsViewBatchDetailsOpen(false);
-                // url to be /user/dashboard
-                window.location.href = '/user/dashboard'
-              }}
-            >Enter Student's Marks</span>
+          <Link
+            to={userRoutes.addStudentToMentor}
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+            }}
+          >
+            Add Student to Mentor
+          </Link>
         </li>
         <li>
-            <span>Mail Templates</span>
+          <Link
+            to={userRoutes.enterStudentMarks}
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+            }}
+          >
+            Enter Student's Marks
+          </Link>
         </li>
         <li>
-            <span
-              onClick={()=>{
-                setIsViewStudentDetailsOpen(!isViewStudentDetailsOpen)
-                setIsEnterStudentMarksOpen(false)
-                setIsMenuOpen(!isMenuOpen)
-                setIsViewStudentOpen(false)
-                setIsViewBatchDetailsOpen(false)
-              }}
-            >View Student's Details</span>
+          <span>Mail Templates</span>
+        </li>
+        <li>
+          <Link
+            to={userRoutes.viewStudentDetails}
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+            }}
+          >
+            View Student's Details
+          </Link>
         </li>
       </ul>
     </div>
-  )
+  );
 }

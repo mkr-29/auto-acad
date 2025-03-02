@@ -1,3 +1,5 @@
+@import "../Styles/variables";
+
 .home {
   &-logo {
     width: 400px;
@@ -9,7 +11,7 @@
     flex-direction: column;
     align-items: center;
     &-main {
-      color: #fff;
+      color: $quinaryColor;
       h1 {
         font-size: 4rem;
         text-align: center;

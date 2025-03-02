@@ -5,8 +5,7 @@ import Navbar from "../../../Components/Navbar/index.page";
 import Footer from "../../../Components/Footer/index.page";
 import { useFormik } from "formik";
 import AuthContext from "../../../context/AuthContext";
-import axios from "axios";
-import { apiRoutes } from "../Routes/apiRoutes";
+import { UserServices } from "../Services/UserServices";
 
 export default function SignIn() {
   const [loading, setLoading] = useState(false);
@@ -17,52 +16,55 @@ export default function SignIn() {
       userId: "",
       password: "",
     },
+    onSubmit: (values) => {
+      handleSubmit();
+      formik.resetForm();
+    },
   });
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     if (formik.values === "") {
       alert("All fields are required");
       return;
     }
 
     const data = formik.values;
-    delete data.confirmPassword;
 
     setLoading(true);
 
-    axios
-      .post(apiRoutes.login, data)
-      .then((response) => {
-        const userData= {
-          userId: response.data.data.userId,
-          name: response.data.data.name,
-          email: response.data.data.email,
+    try {
+      const response = await UserServices.login(data);
+
+      if (response.status >= 400) {
+        throw new Error(response.message);
+      } else {
+        const userData = {
+          userId: response.data.userId,
+          name: response.data.name,
+          email: response.data.email,
         };
         // Login the user
         const { token, user } = {
-          token: response.data.token,
+          token: response.token,
           user: userData,
-        }
-        login(token, user); // Save token and navigate to dashboard
-      })
-      .catch((error) => {
-        if (error.response) {
-          console.error("Error Response:", error.response.data);
-          alert(
-            `Error: ${error.response.status} - ${
-              error.response.data.message || "Unauthorized"
-            }`
-          );
-        } else {
-          console.error("Error Message:", error.message);
-        }
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  };
+        };
 
-  console.log("apibaseurl", process.env.REACT_APP_API_BASE_URL);
+        login(token, user); // Save token and navigate to dashboard
+      }
+    } catch (error) {
+      if (error.response) {
+        console.error("Error Response:", error.response.data);
+        alert(
+          `Error: ${error.response.status} - ${
+            error.response.data.message || "Unauthorized"
+          }`
+        );
+      } else {
+        console.error("Error Message:", error.message);
+      }
+    }
+    setLoading(false);
+  };
 
   return (
     <div className="sign-in bgc">
@@ -98,7 +100,7 @@ export default function SignIn() {
             <button
               type="button"
               className="sign-in-box-inner-button"
-              onClick={handleSubmit}
+              onClick={formik.handleSubmit}
               disabled={loading}
             >
               {loading ? "Submitting..." : "SUBMIT"}

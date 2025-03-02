@@ -1,0 +1,85 @@
+@import "../../Styles/_variables.scss";
+
+.enter-student-marks{
+    padding-top: 3rem;
+    h2{
+        margin-top: 40px;
+        color: $quinaryColor;
+        font-weight: bold;
+        font-size: 2rem;
+        font-style: inherit;
+        display: flex;
+        justify-content: center;
+    }
+}
+.box{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    gap: 80px;
+    row-gap: 300px;
+    margin-top: 320px;
+}
+.enter-marks{
+    width: 260px;
+    padding: 12px 0px;
+    border-radius: 10px;
+    background-color: $quinaryColor;
+    font-size: 19px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.enter-marks-manually{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    gap: 40%;
+    h3{
+        color: $quinaryColor;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    form{
+        display: flex;
+        flex-direction: column;
+        width: 20rem;
+        label{
+            color: $quinaryColor;
+            font-family: $fontFamily;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            margin-left: 0.5rem;
+        }
+        input{
+            padding: 0.5rem;
+            margin-top: 0.2rem;
+            border-radius: 5px;
+            border: none;
+            font-family: $fontFamily;
+            font-size: 1.2rem;
+            background-color: $quinaryColor;
+            color: $primaryColor;
+            &:focus{
+                outline: none;
+            }
+        }
+        button{
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border-radius: 5px;
+            border: none;
+            font-family: $fontFamily;
+            font-size: 1.2rem;
+            background-color: $primaryColor;
+            color: $quinaryColor;
+            cursor: pointer;
+            &:focus{
+                outline: none;
+            }
+        }
+    }
+}

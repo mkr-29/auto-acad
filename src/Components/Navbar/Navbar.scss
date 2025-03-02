@@ -1,5 +1,7 @@
+@import "../../pages/User/Styles/variables";
+
 .navbar{
-    background-color: #161d6f;
+    background-color: $primaryColor;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -13,21 +15,21 @@
     }
     &-link{
         text-decoration: none;
-        color: #fff;
-        font-family: 'Roboto', sans-serif;
+        color: $quinaryColor;
+        font-family: $fontFamily;
         font-size: 18px;
         cursor: pointer;
         &-active{
-            color: #98DED9;
-            text-decoration: underline;
+            color: $quinaryColor;
+            // text-decoration: underline;
             font-weight: 600;
         }
         &-sign-in{
-            border: 3px solid #98DED9;
+            border: 3px solid $quinaryColor;
             background-color: transparent;
             padding: 0 1rem;
             border-radius: 5px;
-            color: #fff;
+            color: $quinaryColor;
             width: auto;
             height: 2rem;
             display: flex;
