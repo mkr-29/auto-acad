@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./AddStudentToMentor.scss";
 import { useFormik } from "formik";
 import { StudentService } from "../../Services/StudentService";
@@ -67,7 +67,19 @@ export default function AddStudentToMentor() {
       parentsData: "",
     },
   };
+  const [userId, setUserId] = useState("");
 
+  // Get userId from localStorage
+  const getUserId = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (user) {
+      setUserId(user.userId);
+    } else {
+      setUserId("");
+    }
+  }
+
+  // Add student's college data to database
   const addCollege = async () => {
     const payload = formik.values.collegeData;
 
@@ -100,6 +112,7 @@ export default function AddStudentToMentor() {
     }
   };
 
+  // Add student's subjects data to database
   const addSubject = async (subjectsData, i) => {
     const payload = subjectsData;
 
@@ -142,6 +155,7 @@ export default function AddStudentToMentor() {
     }
   };
 
+  // Add student's parents data to database
   const addParents = async () => {
     const payload = formik.values.parentsData;
 
@@ -174,10 +188,18 @@ export default function AddStudentToMentor() {
     }
   };
 
+  // Submit student data to database
   const handleSubmit = async () => {
     submitPayload.studentData.personalData = formik.values.personalData;
     let count = 0;
     const allFieldsFilled = validateFields(formik.values);
+
+    if(!userId) {
+      toast.error("User not found!");
+      return;
+    } else {
+      submitPayload.userId = userId;
+    }
 
     if (!allFieldsFilled) {
       toast.error("Please fill in all required fields before submitting.");
@@ -215,8 +237,12 @@ export default function AddStudentToMentor() {
       }
       count++;
       if (count === formik.values.academicData.subjectCount + 2) {
+        console.log("submitPayload", submitPayload);
         const response = await StudentService.addStudent(submitPayload);
-        if (response.status >= 400) {
+        if (!response.success) {
+          if(response.message === "Validation error.") {
+            toast.success("Student added!");
+          }
           toast.error(response.message);
           throw new Error(response.message);
         } else {
@@ -237,6 +263,10 @@ export default function AddStudentToMentor() {
       formik.resetForm();
     }
   };
+
+  useEffect(() => {
+    getUserId();
+  }, []);
 
   return (
     <div className="add-student">
