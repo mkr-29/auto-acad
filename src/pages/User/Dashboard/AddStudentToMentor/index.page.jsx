@@ -3,6 +3,7 @@ import "./AddStudentToMentor.scss";
 import { useFormik } from "formik";
 import { StudentService } from "../../Services/StudentService";
 import { toast } from "react-toastify";
+import { validateFields } from "../../Utils/helper";
 
 export default function AddStudentToMentor() {
   const [loading, setLoading] = useState(false);
@@ -29,15 +30,14 @@ export default function AddStudentToMentor() {
         hostelNo: "",
         room: 0,
       },
-      collegeId: "",
       academicData: {
         subjectCount: 0,
         sgpa: 0,
         cgpa: 0,
         backlog: 0,
         credits: 0,
-        // add subjectData array size as per subjectCount
-        subjectData: [],
+        // add subjectsData array size as per subjectCount
+        subjectsData: [],
       },
       parentsData: {
         father: {
@@ -59,6 +59,14 @@ export default function AddStudentToMentor() {
       // formik.resetForm();
     },
   });
+  const submitPayload = {
+    studentData: {
+      personalData: {},
+      collegeData: "",
+      academicsData: {},
+      parentsData: "",
+    },
+  };
 
   const addCollege = async () => {
     const payload = formik.values.collegeData;
@@ -78,13 +86,12 @@ export default function AddStudentToMentor() {
     try {
       const response = await StudentService.addCollege(payload);
 
-      const { data, success, message } = response;
-      console.log("data", data);
+      const { data, success } = response;
       if (success) {
-        formik.setFieldValue("collegeId", data);
-        toast.success("Success: " + message);
+        submitPayload.studentData.collegeData = data;
+        return response;
       } else {
-        toast.error("Error: " + message);
+        return response;
       }
     } catch (error) {
       toast.error("Error adding college!");
@@ -93,8 +100,8 @@ export default function AddStudentToMentor() {
     }
   };
 
-  const addSubject = async (subjectData, i) => {
-    const payload = subjectData;
+  const addSubject = async (subjectsData, i) => {
+    const payload = subjectsData;
 
     // Validate: Ensure all fields have values
     const isPayloadValid = Object.values(payload).every(
@@ -111,12 +118,22 @@ export default function AddStudentToMentor() {
     try {
       const response = await StudentService.addSubject(payload);
 
-      const { data, success, message } = response;
+      const { data, success } = response;
       if (success) {
-        formik.setFieldValue(`subjectData[${i}].subjectId`, data);
-        toast.success("Success: " + message);
+        // clear the subjectsData array for i index  and then for the same index set data for key subjectId and subjectNo
+        formik.setFieldValue(`academicData.subjectsData[${i}]`, {});
+        formik.setFieldValue(`academicData.subjectsData[${i}].subjectId`, data);
+        formik.setFieldValue(`academicData.subjectsData[${i}].subjectNo`, i);
+        submitPayload.studentData.academicsData = formik.values.academicData;
+        submitPayload.studentData.academicsData.subjectsData[i] = {};
+        submitPayload.studentData.academicsData.subjectsData[i].subjectId =
+          data;
+        submitPayload.studentData.academicsData.subjectsData[i].subjectNo =
+          i + 1;
+
+        return response;
       } else {
-        toast.error("Error: " + message);
+        return response;
       }
     } catch (error) {
       toast.error("Error adding subjects!");
@@ -125,46 +142,86 @@ export default function AddStudentToMentor() {
     }
   };
 
-  const handleSubmit = async () => {
-    const payload = {
-      studentData: {
-        personalData: formik.values.personalData,
-        collegeId: formik.values.collegeId,
-        academicData: formik.values.academicData,
-        parentsData: formik.values.parentsData,
-      },
-    };
+  const addParents = async () => {
+    const payload = formik.values.parentsData;
 
-    console.log("payload", payload);
+    // Validate: Ensure all fields have values
+    const isPayloadValid = Object.values(payload).every(
+      (value) => value !== "" && value !== null && value !== undefined
+    );
 
-    // const isPayloadValid = Object.values(payload.studentData).every(
-    //   (value) => value !== "" && value !== null && value !== undefined
-    // );
-
-    // if (!isPayloadValid) {
-    //   toast.warning("Please fill all required fields.");
-    //   return;
-    // }
+    if (!isPayloadValid) {
+      toast.error("Please fill all required fields.");
+      return;
+    }
 
     setLoading(true);
 
     try {
-      addCollege();
-      if (!formik.values.collegeId) {
-        throw new Error("College not added");
+      const response = await StudentService.addParents(payload);
+
+      const { data, success } = response;
+      if (success) {
+        submitPayload.studentData.parentsData = data;
+        return response;
+      } else {
+        return response;
       }
+    } catch (error) {
+      toast.error("Error adding parents!");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async () => {
+    submitPayload.studentData.personalData = formik.values.personalData;
+    let count = 0;
+    const allFieldsFilled = validateFields(formik.values);
+
+    if (!allFieldsFilled) {
+      toast.error("Please fill in all required fields before submitting.");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const collegeRes = await addCollege();
+      if (!collegeRes.success) {
+        toast.error(collegeRes.message);
+        throw new Error(collegeRes.message);
+      }
+
+      count++;
       if (formik.values.academicData.subjectCount > 0) {
         for (let i = 0; i < formik.values.academicData.subjectCount; i++) {
-          addSubject(formik.values.academicData.subjectData[i], i);
+          const subjectRes = await addSubject(
+            formik.values.academicData.subjectsData[i],
+            i
+          );
+          if (!subjectRes.success) {
+            toast.error(subjectRes.message);
+            throw new Error(subjectRes.message);
+          }
+          count++;
         }
       }
-      payload.collegeId = formik.values.collegeId;
-      const response = await StudentService.addStudent(payload);
-      if (response.status >= 400) {
-        throw new Error(response.message);
-      } else {
-        // alert("Student added successfully");
-        toast.success("Student added successfully");
+
+      const parentRes = await addParents();
+      if (!parentRes.success) {
+        toast.error(parentRes.message);
+        throw new Error(parentRes.message);
+      }
+      count++;
+      if (count === formik.values.academicData.subjectCount + 2) {
+        const response = await StudentService.addStudent(submitPayload);
+        if (response.status >= 400) {
+          toast.error(response.message);
+          throw new Error(response.message);
+        } else {
+          toast.success("Student added successfully");
+        }
       }
     } catch (error) {
       if (error.response) {
@@ -177,10 +234,9 @@ export default function AddStudentToMentor() {
       }
     } finally {
       setLoading(false);
+      formik.resetForm();
     }
   };
-
-  console.log("formik.values", formik.values);
 
   return (
     <div className="add-student">
@@ -552,7 +608,7 @@ export default function AddStudentToMentor() {
             />
           </div>
         </div>
-        {/* Add subjectData fields as per subjectCount */}
+        {/* Add subjectsData fields as per subjectCount */}
         {formik.values.academicData.subjectCount > 0 &&
           Array.from({ length: formik.values.academicData.subjectCount }).map(
             (_, index) => (
@@ -565,15 +621,15 @@ export default function AddStudentToMentor() {
                     <input
                       type="text"
                       id={`subject${index + 1}name`}
-                      name={`academicData.subjectData[${index}]name`}
+                      name={`academicData.subjectsData[${index}]name`}
                       value={
-                        formik.values.academicData.subjectData[index]
+                        formik.values.academicData.subjectsData[index]
                           ?.subjectName || ""
                       }
                       onChange={(e) => {
                         const { value } = e.target;
                         formik.setFieldValue(
-                          `academicData.subjectData[${index}].subjectName`,
+                          `academicData.subjectsData[${index}].subjectName`,
                           value
                         );
                       }}
@@ -587,15 +643,15 @@ export default function AddStudentToMentor() {
                     <input
                       type="text"
                       id={`subject${index + 1}code`}
-                      name={`academicData.subjectData[${index}]code`}
+                      name={`academicData.subjectsData[${index}]code`}
                       value={
-                        formik.values.academicData.subjectData[index]
+                        formik.values.academicData.subjectsData[index]
                           ?.subjectCode || ""
                       }
                       onChange={(e) => {
                         const { value } = e.target;
                         formik.setFieldValue(
-                          `academicData.subjectData[${index}].subjectCode`,
+                          `academicData.subjectsData[${index}].subjectCode`,
                           value
                         );
                       }}
@@ -611,15 +667,15 @@ export default function AddStudentToMentor() {
                     <input
                       type="text"
                       id={`subject${index + 1}faculty`}
-                      name={`academicData.subjectData[${index}]faculty`}
+                      name={`academicData.subjectsData[${index}]faculty`}
                       value={
-                        formik.values.academicData.subjectData[index]
+                        formik.values.academicData.subjectsData[index]
                           ?.subjectFaculty || ""
                       }
                       onChange={(e) => {
                         const { value } = e.target;
                         formik.setFieldValue(
-                          `academicData.subjectData[${index}].subjectFaculty`,
+                          `academicData.subjectsData[${index}].subjectFaculty`,
                           value
                         );
                       }}
@@ -633,9 +689,9 @@ export default function AddStudentToMentor() {
                     <input
                       type="number"
                       id={`subjects${index + 1}credits`}
-                      name={`academicData.subjectData[${index}]credits`}
+                      name={`academicData.subjectsData[${index}]credits`}
                       value={
-                        formik.values.academicData.subjectData[index]
+                        formik.values.academicData.subjectsData[index]
                           ?.credits || ""
                       }
                       onChange={(e) => {
@@ -644,12 +700,12 @@ export default function AddStudentToMentor() {
                         // Restrict value to max 10 and min 0
                         if (value >= 0 && value <= 10) {
                           formik.setFieldValue(
-                            `academicData.subjectData[${index}].credits`,
+                            `academicData.subjectsData[${index}].credits`,
                             value
                           );
                         } else if (value < 0) {
                           formik.setFieldValue(
-                            `academicData.subjectData[${index}].credits`,
+                            `academicData.subjectsData[${index}].credits`,
                             "" // Reset to empty if less than 0
                           );
                         }
@@ -668,15 +724,15 @@ export default function AddStudentToMentor() {
                     <input
                       type="text"
                       id={`subject${index + 1}type`}
-                      name={`academicData.subjectData[${index}]type`}
+                      name={`academicData.subjectsData[${index}]type`}
                       value={
-                        formik.values.academicData.subjectData[index]
+                        formik.values.academicData.subjectsData[index]
                           ?.subjectType || ""
                       }
                       onChange={(e) => {
                         const { value } = e.target;
                         formik.setFieldValue(
-                          `academicData.subjectData[${index}].subjectType`,
+                          `academicData.subjectsData[${index}].subjectType`,
                           value
                         );
                       }}
@@ -690,9 +746,9 @@ export default function AddStudentToMentor() {
                     <input
                       type="number"
                       id={`subject${index + 1}attendance`}
-                      name={`academicData.subjectData[${index}]attendance`}
+                      name={`academicData.subjectsData[${index}]attendance`}
                       value={
-                        formik.values.academicData.subjectData[index]
+                        formik.values.academicData.subjectsData[index]
                           ?.attendance || ""
                       }
                       onChange={(e) => {
@@ -701,12 +757,12 @@ export default function AddStudentToMentor() {
                         // Restrict value to max 100 and min 0
                         if (value >= 0 && value <= 100) {
                           formik.setFieldValue(
-                            `academicData.subjectData[${index}].attendance`,
+                            `academicData.subjectsData[${index}].attendance`,
                             value
                           );
                         } else if (value < 0) {
                           formik.setFieldValue(
-                            `academicData.subjectData[${index}].attendance`,
+                            `academicData.subjectsData[${index}].attendance`,
                             "" // Reset to empty if less than 0
                           );
                         }
@@ -725,9 +781,9 @@ export default function AddStudentToMentor() {
                     <input
                       type="number"
                       id={`subject${index + 1}noOfTests`}
-                      name={`academicData.subjectData[${index}]noOfTests`}
+                      name={`academicData.subjectsData[${index}]noOfTests`}
                       value={
-                        formik.values.academicData.subjectData[index]
+                        formik.values.academicData.subjectsData[index]
                           ?.noOfTests || ""
                       }
                       onChange={(e) => {
@@ -736,12 +792,12 @@ export default function AddStudentToMentor() {
                         // Restrict value to max 10 and min 0
                         if (value >= 0 && value <= 10) {
                           formik.setFieldValue(
-                            `academicData.subjectData[${index}].noOfTests`,
+                            `academicData.subjectsData[${index}].noOfTests`,
                             value
                           );
                         } else if (value < 0) {
                           formik.setFieldValue(
-                            `academicData.subjectData[${index}].noOfTests`,
+                            `academicData.subjectsData[${index}].noOfTests`,
                             "" // Reset to empty if less than 0
                           );
                         }
@@ -751,7 +807,7 @@ export default function AddStudentToMentor() {
                       max={10}
                     />
                   </div>
-                  {formik.values.academicData.subjectData[index]?.noOfTests >
+                  {formik.values.academicData.subjectsData[index]?.noOfTests >
                     0 && (
                     <div className="form-group">
                       <label htmlFor={`subject${index + 1}test1marks`}>
@@ -760,20 +816,20 @@ export default function AddStudentToMentor() {
                       <input
                         type="number"
                         id={`subject${index + 1}test1marks`}
-                        name={`academicData.subjectData[${index}].marks[0].score`}
+                        name={`academicData.subjectsData[${index}].marks[0].score`}
                         value={
-                          formik.values.academicData?.subjectData[index]
+                          formik.values.academicData?.subjectsData[index]
                             ?.marks?.[0]?.score || ""
                         }
                         onChange={(e) => {
                           let value = Number(e.target.value);
 
                           if (
-                            !formik.values.academicData.subjectData[index]
+                            !formik.values.academicData.subjectsData[index]
                               ?.marks
                           ) {
                             formik.setFieldValue(
-                              `academicData.subjectData[${index}].marks`,
+                              `academicData.subjectsData[${index}].marks`,
                               []
                             );
                           }
@@ -781,12 +837,12 @@ export default function AddStudentToMentor() {
                           // Restrict value between 0 and 100
                           if (value >= 0 && value <= 100) {
                             formik.setFieldValue(
-                              `academicData.subjectData[${index}].marks[0]`,
+                              `academicData.subjectsData[${index}].marks[0]`,
                               { score: value, testNo: 1 }
                             );
                           } else if (value < 0) {
                             formik.setFieldValue(
-                              `academicData.subjectData[${index}].marks[0]`,
+                              `academicData.subjectsData[${index}].marks[0]`,
                               { score: null, testNo: 1 }
                             );
                           }
@@ -798,11 +854,12 @@ export default function AddStudentToMentor() {
                     </div>
                   )}
                 </div>
-                {formik.values.academicData.subjectData[index]?.noOfTests > 1 &&
+                {formik.values.academicData.subjectsData[index]?.noOfTests >
+                  1 &&
                   Array.from({
                     length:
-                      formik.values.academicData.subjectData[index]?.noOfTests -
-                      1,
+                      formik.values.academicData.subjectsData[index]
+                        ?.noOfTests - 1,
                   })
                     .reduce((acc, _, testIndex) => {
                       // Group every two test fields inside a single div
@@ -824,9 +881,9 @@ export default function AddStudentToMentor() {
                             <input
                               type="number"
                               id={`subject${index + 1}test${testNum}marks`}
-                              name={`academicData.subjectData[${index}].test${testNum}Marks`}
+                              name={`academicData.subjectsData[${index}].test${testNum}Marks`}
                               value={
-                                formik.values.academicData.subjectData[index]
+                                formik.values.academicData.subjectsData[index]
                                   ?.marks?.[testNum - 1]?.score || ""
                               }
                               onChange={(e) => {
@@ -835,26 +892,26 @@ export default function AddStudentToMentor() {
                                 // Restrict value between 0 and 100
                                 if (value >= 0 && value <= 100) {
                                   formik.setFieldValue(
-                                    `academicData.subjectData[${index}].marks[${
+                                    `academicData.subjectsData[${index}].marks[${
                                       testNum - 1
                                     }].score`,
                                     value
                                   );
                                   formik.setFieldValue(
-                                    `academicData.subjectData[${index}].marks[${
+                                    `academicData.subjectsData[${index}].marks[${
                                       testNum - 1
                                     }].testNo`,
                                     testNum
                                   );
                                 } else if (value < 0) {
                                   formik.setFieldValue(
-                                    `academicData.subjectData[${index}].marks[${
+                                    `academicData.subjectsData[${index}].marks[${
                                       testNum - 1
                                     }].score`,
                                     null
                                   );
                                   formik.setFieldValue(
-                                    `academicData.subjectData[${index}].marks[${
+                                    `academicData.subjectsData[${index}].marks[${
                                       testNum - 1
                                     }].testNo`,
                                     testNum
@@ -1008,7 +1065,7 @@ export default function AddStudentToMentor() {
           <div className="form-group">
             <label htmlFor="fatherPhone">Father's Phone</label>
             <input
-              type="number"
+              type="text"
               id="fatherPhone"
               name="parentsData.father.phone"
               value={formik.values.parentsData.father.phone}
@@ -1056,7 +1113,7 @@ export default function AddStudentToMentor() {
           <div className="form-group">
             <label htmlFor="motherPhone">Mother's Phone</label>
             <input
-              type="number"
+              type="text"
               id="motherPhone"
               name="parentsData.mother.phone"
               value={formik.values.parentsData.mother.phone}

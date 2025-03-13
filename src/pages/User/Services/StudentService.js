@@ -58,4 +58,20 @@ export const StudentService = {
       }
     }
   },
+  addParents: async (data) => {
+    try {
+      const response = await apiRequest(
+        apiRoutes.addParents.method,
+        apiRoutes.addParents.url,
+        data
+      );
+      return response;
+    } catch (error) {
+      if (error.response) {
+        return error.response.data;
+      } else {
+        return error.message;
+      }
+    }
+  },
 };

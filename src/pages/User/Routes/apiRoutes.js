@@ -23,4 +23,8 @@ export const apiRoutes = {
     url: `${process.env.REACT_APP_API_BASE_URL}api/subject`,
     method: "POST",
   },
+  addParents: {
+    url: `${process.env.REACT_APP_API_BASE_URL}api/parents`,
+    method: "POST",
+  },
 };
