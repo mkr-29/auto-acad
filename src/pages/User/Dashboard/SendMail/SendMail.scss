@@ -1,16 +1,27 @@
+@import "../../Styles/variables";
+
 .mail-preview{
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #0B2F9F;
     padding: 2rem 0;
     gap: 1rem;
+    &-edit{
+        display: flex;
+        width: 80%;
+        justify-content: flex-end;
+        svg{
+            color: white;
+            cursor: pointer;
+            font-size: 22px;
+        }
+    }
     &-box{
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         width: 80%;
-        background-color: #98DED9;
+        background-color: $quinaryColor;
         border-radius: 15px;
         padding: 1rem;
     }
@@ -24,18 +35,20 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
+        gap: 0.5rem;
+        width: 100%;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid $primaryColor;
         span{
-            color: rgb(119, 119, 119);
-            font-size: 18px;
+            color: $primaryColor;
+            font-size: 16px;
             font-weight: 600;
-            margin-top: 1rem;
         }
         h3{
             color: #0B2F9F;
             font-size: 20px;
             font-weight: 600;
-            margin-top: 1rem;
-            margin-top: 0.3rem;
+            margin: 0;
         }
     }
     &-body{
@@ -43,8 +56,8 @@
         flex-direction: column;
         align-items: flex-start;
         span{
-            color: rgb(119, 119, 119);
-            font-size: 18px;
+            color: $primaryColor;
+            font-size: 16px;
             font-weight: 600;
             margin-top: 1rem;
         }

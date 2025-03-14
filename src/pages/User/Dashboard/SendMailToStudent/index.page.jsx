@@ -2,11 +2,8 @@ import React, { useState } from "react";
 import "./SendMailToStudent.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { ReactComponent as AutoAcadLogo } from "../../../assets/Logo/AutoAcadLogo.svg";
-import Navbar from "../../../Components/Navbar/index.page";
-import PrimaryButton from "../../../Components/PrimaryButton/index.page";
-import SelectTemplate from "../../../Components/SelectTemplate/index.page";
-import Footer from "../../../Components/Footer/index.page";
+import PrimaryButton from "../../../../Components/PrimaryButton/index.page";
+import SelectTemplate from "../../../../Components/SelectTemplate/index.page";
 
 export default function SendMailToStudent() {
   const navigate = useNavigate();
@@ -14,8 +11,6 @@ export default function SendMailToStudent() {
 
   return (
     <div>
-      <Navbar />
-      <AutoAcadLogo className="dashboard-logo" />
       <div className="send-mail-stu">
         <h1 className="send-mail-stu-heading">Send Mail To Student</h1>
         <Link to="/user/dashboard" className="send-mail-stu-back">
@@ -32,7 +27,6 @@ export default function SendMailToStudent() {
           />
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

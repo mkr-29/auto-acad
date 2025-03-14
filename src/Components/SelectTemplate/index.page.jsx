@@ -2,6 +2,7 @@ import React from 'react'
 import "./SelectTemplate.scss"
 import SelectTemplateCard from './SelectTemplateCard/index.page';
 import { Link } from 'react-router-dom';
+import { userRoutes } from '../../routes/appRoutes';
 
 export default function SelectTemplate({
   selectedTemplate,
@@ -16,7 +17,7 @@ export default function SelectTemplate({
           templateId='template1'
           templateMenu={(
             <div>
-              <Link to="/user/view-template">View Template</Link>
+              <Link to={userRoutes.mail}>View Template</Link>
               <Link to="">Delete Template</Link>
             </div>
           )}
@@ -27,7 +28,7 @@ export default function SelectTemplate({
           templateId='template2'
           templateMenu={(
             <div>
-              <Link to="">View Template</Link>
+              <Link to={userRoutes.mail}>View Template</Link>
               <Link to="">Delete Template</Link>
             </div>
           )}

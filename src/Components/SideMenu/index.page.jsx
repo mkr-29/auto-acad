@@ -3,10 +3,7 @@ import "./SideMenu.scss";
 import { Link } from "react-router-dom";
 import { userRoutes } from "../../routes/appRoutes";
 
-export default function SideMenu({
-  isMenuOpen,
-  setIsMenuOpen,
-}) {
+export default function SideMenu({ isMenuOpen, setIsMenuOpen }) {
   return (
     <div className="side-menu">
       <ul>
@@ -31,7 +28,14 @@ export default function SideMenu({
           </Link>
         </li>
         <li>
-          <span>Mail Templates</span>
+          <Link
+            to={userRoutes.sendMailToStudent}
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+            }}
+          >
+            Mail Templates
+          </Link>
         </li>
         <li>
           <Link
