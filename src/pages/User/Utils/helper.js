@@ -27,3 +27,9 @@ export const validateFields = (data) => {
   }
   return true;
 };
+
+// get user id from local storage
+export const getUserId = () => {
+  const uId = localStorage.getItem("user");
+  return JSON.parse(uId).userId;
+};

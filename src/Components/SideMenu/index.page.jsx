@@ -44,7 +44,7 @@ export default function SideMenu({ isMenuOpen, setIsMenuOpen }) {
               setIsMenuOpen(!isMenuOpen);
             }}
           >
-            View Student's Details
+            View Students
           </Link>
         </li>
       </ul>

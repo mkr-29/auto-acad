@@ -5,6 +5,7 @@ import EnterMarksManually from "../pages/User/Dashboard/EnterStudentMarks/EnterM
 import { appRoutes, userRoutes } from "./appRoutes";
 import AddStudentToMentor from "../pages/User/Dashboard/AddStudentToMentor/index.page";
 import SendMailToStudent from "../pages/User/Dashboard/SendMailToStudent/index.page";
+import ViewBatchDetails from "../pages/User/Dashboard/ViewBatchDetails/index.page";
 
 const protectedRoutes = [
   {
@@ -59,6 +60,14 @@ const protectedRoutes = [
       </Dashboard>
     ),
   },
+  {
+    path: userRoutes.viewStudents,
+    element: (
+      <Dashboard>
+        <ViewBatchDetails/>
+      </Dashboard>
+    )
+  }
 ];
 
 export default protectedRoutes;

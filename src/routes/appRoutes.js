@@ -10,8 +10,7 @@ const userRoutes = {
   enterStudentMarks: "/user/enter-student-marks",
   sendMailToStudent: "/user/send-mail-to-student",
   mail: "/user/mail",
-  viewStudentDetails: "/user/view-student-details",
-  viewBatchDetails: "/user/view-batch-details",
+  viewStudents: "/user/view-students",
   enterMarksManually: "/user/enter-student-marks-manual",
   enterMarksUsingCsv: "/user/enter-student-marks-csv",
 }

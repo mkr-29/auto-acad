@@ -74,4 +74,19 @@ export const StudentService = {
       }
     }
   },
+  getStudentsByUserId: async (userId) => {
+    try {
+      const response = await apiRequest(
+        apiRoutes.getStudentsByUserId.method,
+        apiRoutes.getStudentsByUserId.url + `/${userId}`
+      );
+      return response;
+    } catch (error) {
+      if (error.response) {
+        return error.response.data;
+      } else {
+        return error.message;
+      }
+    }
+  },
 };

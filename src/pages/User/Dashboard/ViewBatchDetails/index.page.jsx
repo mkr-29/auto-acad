@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./ViewBatchDetails.scss";
 import { MdFilterAlt } from "react-icons/md";
 import { FiMenu } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import Popover from "../../../Components/Popover/index.page";
-import Modal from "../../../Components/Modal/index.page";
-import Table from "../../../Components/Table/index.page";
+import Popover from "../../../../Components/Popover/index.page";
+import Modal from "../../../../Components/Modal/index.page";
+import Table from "../../../../Components/Table/index.page";
+import { StudentService } from "../../Services/StudentService";
+import { toast } from "react-toastify";
+import { getUserId } from "../../Utils/helper";
 
 export default function ViewBatchDetails() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -15,6 +18,26 @@ export default function ViewBatchDetails() {
     attendance: { from: "", to: "" },
   });
   const [selectedStudentsEmail, setSelectedStudentsEmail] = useState([]);
+  const userId = getUserId();
+
+  const getStudents = async () => {
+    try {
+      const response = await StudentService.getStudentsByUserId(userId);
+
+      if (response.success) {
+        console.log("students", response.data);
+      } else {
+        toast.error(response.message);
+        console.error("Error Message:", response.message);
+      }
+    } catch (error) {
+      console.error("Error Message:", error.message);
+    }
+  };
+
+  useEffect(() => {
+    getStudents();
+  }, []);
 
   const data = [
     {
@@ -176,7 +199,12 @@ export default function ViewBatchDetails() {
           icon={<FiMenu />}
           content={
             <div className="view-batch-menu-content">
-              <Link to="/user/send-mail-to-student" className="view-batch-menu-item">Send Mail to Student</Link>
+              <Link
+                to="/user/send-mail-to-student"
+                className="view-batch-menu-item"
+              >
+                Send Mail to Student
+              </Link>
               <div className="view-batch-menu-item">Send Mail to Parent</div>
             </div>
           }

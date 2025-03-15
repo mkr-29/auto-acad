@@ -3,15 +3,18 @@ import MailsJson from "./mailTemplates.json";
 import { FaRegEdit } from "react-icons/fa";
 import "./SendMail.scss";
 import PrimaryButton from "../../../../Components/PrimaryButton/index.page";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
 export default function SendMail({ selectedTemplate = "template1" }) {
   const [isEditing, setIsEditing] = useState(false);
   //   const [email, setEmail] = useState("");
   //   const [message, setMessage] = useState("");
-
+  
   const mailToRender = MailsJson.find(
     (mail) => mail.templateId === selectedTemplate
   );
+  const [content, setContent] = useState(mailToRender?.body);
 
   //   const sendEmail = async () => {
   //     const transporter = nodemailer.createTransport({
@@ -65,15 +68,7 @@ export default function SendMail({ selectedTemplate = "template1" }) {
             </div>
             <div className="mail-preview-body">
               <span>Body: </span>
-              <textarea
-                value={mailToRender?.body}
-                onChange={(e) => {
-                  // setMailToRender({
-                  //   ...mailToRender,
-                  //   body: e.target.value,
-                  // });
-                }}
-              />
+              <ReactQuill theme="snow" value={content} onChange={setContent} className="mail-preview-compose" />
             </div>
           </div>
         ) : (
@@ -89,8 +84,9 @@ export default function SendMail({ selectedTemplate = "template1" }) {
           </div>
         )}
         <PrimaryButton
-          text="Send Mail"
+          text={isEditing ? "Save Mail Template" : "Send Mail"}
           onClick={() => {
+            setIsEditing(false);
             // sendEmail();
           }}
         />

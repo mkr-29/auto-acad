@@ -43,7 +43,7 @@ export const apiRequest = async (method, endpoint, payload, token = null) => {
     }
     const response = await axios(axiosConfig);
 
-    if(response.status >= 400) {
+    if (response.status >= 400) {
       throw new Error(response.message);
     }
 
