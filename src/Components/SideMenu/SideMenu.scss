@@ -1,0 +1,40 @@
+@import "../../pages/User/Styles/variables";
+
+.side-menu{
+    background-color: $quaternaryColor;
+    display: flex;
+    height: 100%;
+    animation: sideMenu 0.5s ease-in-out;
+    width: 20rem;
+    ul{
+        display: flex;
+        flex-direction: column;
+        margin-top: 3.6rem;
+        list-style: none;
+        padding: 0;
+        li{
+            padding: 0.7rem 1.4rem;
+            border-top: 1px solid $primaryColor;
+            display: flex;
+            &:last-child{
+                border-bottom: 1px solid $primaryColor;
+            }
+            a{
+                text-decoration: none;
+                font-size: 18px;
+                font-weight: bold;
+                color: $primaryColor;
+                cursor: pointer;
+            }
+        }
+    }
+}
+
+@keyframes sideMenu {
+    0%{
+        transform: translateX(-100%);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}

@@ -1,0 +1,49 @@
+.popover {
+  display: flex;
+  position: relative;
+  align-items: center;
+  user-select: none;
+  &-icon {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    svg {
+      color: white;
+      width: 25px;
+      height: 25px;
+    }
+  }
+  &-content {
+    position: absolute;
+    z-index: 50;
+    background-color: #00000090;
+    border-radius: 6px;
+    padding: 0.3rem;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    width: max-content;
+    div {
+      display: flex;
+      flex-direction: column;
+      a {
+        text-decoration: none;
+        color: white;
+        font-size: 14px;
+        padding: 0.3rem 1rem;
+        &:hover {
+          background-color: #00000070;
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+}
+.rightBottom {
+  left: 1.5rem;
+  top: 1.5rem;
+}
+.leftBottom{
+    right: 1.5rem;
+    top: 1.5rem;
+}

@@ -1,0 +1,24 @@
+.send-mail-stu{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 3rem;
+    &-heading{
+        color: white;
+        font-size: 26px;
+        font-weight: 600;
+        margin-top: 0;
+        padding-top: 3rem;
+    }
+    &-back{
+        color: white;
+        svg{
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            top: 3rem;
+            right: 3rem;
+        }
+    }
+}

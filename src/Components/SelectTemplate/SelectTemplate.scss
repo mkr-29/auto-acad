@@ -1,0 +1,37 @@
+.select{
+    &-template{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 80%;
+        position: relative;
+        padding: 1rem 0;
+        &-heading{
+            font-size: 22px;
+            margin-top: 0;
+            padding-top: 3rem;
+            color: #fff;
+        }
+    }
+    &-templates{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        width: 100%;
+        gap: 1rem;
+        &-box{
+            display: flex;
+            gap: 1rem;
+            width: 100%;
+            background-color: #ffffff50;
+            padding: 1rem;
+            border-radius: 6px;
+            &-card{
+                display: flex;
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    }
+}

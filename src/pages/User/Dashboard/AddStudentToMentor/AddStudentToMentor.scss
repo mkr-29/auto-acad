@@ -1,0 +1,50 @@
+@import "../../Styles/variables";
+
+.add-student{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    height: auto;
+    h3{
+        color: $quinaryColor;
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    form{
+        width: 60%;
+        display: flex;
+        justify-content: center;
+        position: relative;
+        flex-direction: column;
+        div{
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            .form-group{
+                display: flex;
+                flex-direction: column;
+                width: 40%;
+                label{
+                    color: $quinaryColor;
+                    font-family: $fontFamily;
+                    margin-top: 1rem;
+                    margin-left: 0.5rem;
+                }
+                input{
+                    padding: 0.5rem;
+                    margin-top: 0.2rem;
+                    border-radius: 5px;
+                    border: none;
+                    font-family: $fontFamily;
+                    background-color: $quinaryColor;
+                    color: $primaryColor;
+                    &:focus{
+                        outline: none;
+                    }
+                }
+            }
+        }
+    }
+}
