@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Popover.scss";
 
 export default function Popover({
@@ -9,6 +9,17 @@ export default function Popover({
 }) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
   const popoverRef = useRef();
+  
+  // if i click outside the popover, it should close
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+        setIsPopoverOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div

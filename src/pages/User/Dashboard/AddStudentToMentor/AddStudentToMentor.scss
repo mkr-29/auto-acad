@@ -7,6 +7,9 @@
     flex-direction: column;
     position: relative;
     height: auto;
+    .sign-in-box-inner-button{
+        margin: 2rem 0;
+    }
     h3{
         color: $quinaryColor;
         font-size: 2rem;

@@ -1,3 +1,5 @@
+
+
 const appRoutes = {
   home: "/",
   signIn: "/sign-in",
@@ -9,10 +11,13 @@ const userRoutes = {
   addStudentToMentor: "/user/add-student-to-mentor",
   enterStudentMarks: "/user/enter-student-marks",
   sendMailToStudent: "/user/send-mail-to-student",
-  mail: "/user/mail",
+  mail: (templateId, mode) => {
+    return `/user/mail/${mode}/${templateId}`;
+  },
   viewStudents: "/user/view-students",
   enterMarksManually: "/user/enter-student-marks-manual",
   enterMarksUsingCsv: "/user/enter-student-marks-csv",
+  addEmailTemplate: "/user/add-email-template",
 }
 
 export { appRoutes, userRoutes };

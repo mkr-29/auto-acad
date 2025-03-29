@@ -35,10 +35,6 @@ export default function ViewBatchDetails() {
     }
   };
 
-  useEffect(() => {
-    getStudents();
-  }, []);
-
   const data = [
     {
       "Student Name": "John Doe",
@@ -177,7 +173,12 @@ export default function ViewBatchDetails() {
     </div>
   );
 
-  console.log("selectedStudentsEmail", selectedStudentsEmail);
+  useEffect(() => {
+    getStudents();
+  }, [
+    // eslint-disable-next-line
+    userId,
+  ]);
 
   return (
     <div className="view-batch">

@@ -4,10 +4,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import PrimaryButton from "../../../../Components/PrimaryButton/index.page";
 import SelectTemplate from "../../../../Components/SelectTemplate/index.page";
+import { toast } from "react-toastify";
 
 export default function SendMailToStudent() {
   const navigate = useNavigate();
   const [selectedTemplate, setSelectedTemplate] = useState("");
+  const [loading, setLoading] = useState(false);
 
   return (
     <div>
@@ -22,8 +24,20 @@ export default function SendMailToStudent() {
         />
         <div>
           <PrimaryButton
-            text="Send Mail"
-            onClick={() => navigate("/user/mail")}
+            text={
+              selectedTemplate
+                ? loading
+                  ? "Sending..."
+                  : "Send Mail"
+                : "Select Template"
+            }
+            onClick={() => {
+              if (selectedTemplate) {
+                navigate(`/user/send-mail/${selectedTemplate}`);
+              } else {
+                toast.warning("Please select a template!");
+              }
+            }}
           />
         </div>
       </div>

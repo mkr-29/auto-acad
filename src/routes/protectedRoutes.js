@@ -6,6 +6,7 @@ import { appRoutes, userRoutes } from "./appRoutes";
 import AddStudentToMentor from "../pages/User/Dashboard/AddStudentToMentor/index.page";
 import SendMailToStudent from "../pages/User/Dashboard/SendMailToStudent/index.page";
 import ViewBatchDetails from "../pages/User/Dashboard/ViewBatchDetails/index.page";
+import AddEmailTemplate from "../pages/User/Dashboard/AddEmailTemplate/index.page";
 
 const protectedRoutes = [
   {
@@ -53,7 +54,7 @@ const protectedRoutes = [
     ),
   },
   {
-    path: userRoutes.mail,
+    path: "/user/mail/:mode/:templateId",
     element: (
       <Dashboard>
         <SendMail />
@@ -64,10 +65,18 @@ const protectedRoutes = [
     path: userRoutes.viewStudents,
     element: (
       <Dashboard>
-        <ViewBatchDetails/>
+        <ViewBatchDetails />
       </Dashboard>
-    )
-  }
+    ),
+  },
+  {
+    path: userRoutes.addEmailTemplate,
+    element: (
+      <Dashboard>
+        <AddEmailTemplate />
+      </Dashboard>
+    ),
+  },
 ];
 
 export default protectedRoutes;

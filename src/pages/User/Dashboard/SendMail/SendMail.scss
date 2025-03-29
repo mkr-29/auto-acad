@@ -12,6 +12,17 @@
     display: flex;
     flex-direction: column-reverse;
     z-index: 0;
+    &-read{
+      width: 100%;
+      .ql{
+        &-editor{
+          padding: 0;
+        }
+        &-container {
+          border: none !important;
+        }
+      }
+    }
     .ql {
       &-toolbar {
         span {

@@ -31,4 +31,20 @@ export const apiRoutes = {
     url: `${process.env.REACT_APP_API_BASE_URL}api/students/user`,
     method: "GET",
   },
+  addEmail: {
+    url: `${process.env.REACT_APP_API_BASE_URL}api/emails`,
+    method: "POST",
+  },
+  getEmails: {
+    url: `${process.env.REACT_APP_API_BASE_URL}api/emails/:userId`,
+    method: "GET",
+  },
+  deleteEmail: {
+    url: `${process.env.REACT_APP_API_BASE_URL}api/emails/:templateId`,
+    method: "DELETE",
+  },
+  getEmailTemplate: {
+    url: `${process.env.REACT_APP_API_BASE_URL}api/emails/template/:templateId`,
+    method: "GET",
+  },
 };
