@@ -1,6 +1,5 @@
 import { apiRequest } from "../API/axios";
 import { apiRoutes } from "../Routes/apiRoutes";
-import { getUserId } from "../Utils/helper";
 
 export const EmailService = {
   addEmail: async (data) => {
@@ -29,7 +28,6 @@ export const EmailService = {
   },
   getEmails: async () => {
     const token = localStorage.getItem("authToken");
-    const userId = getUserId();
     if (!token) {
       alert("Unauthorized");
       return;
@@ -37,7 +35,7 @@ export const EmailService = {
     try {
       const response = await apiRequest(
         apiRoutes.getEmails.method,
-        apiRoutes.getEmails.url.replace(":userId", userId),
+        apiRoutes.getEmails.url,
         null,
         token
       );
@@ -98,6 +96,30 @@ export const EmailService = {
         console.error("Error Message:", error.message);
         return error.message;
       }
+    }
+  },
+  updateEmailTemplate: async (data) => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      alert("Unauthorized");
+      return;
+    }
+    try {
+      const payload = {
+        subject: data.subject,
+        body: data.body
+      }
+      const id = data.id;
+      const response = await apiRequest(
+        apiRoutes.updateEmailTemplate.method,
+        apiRoutes.updateEmailTemplate.url.replace(":templateId", id),
+        payload,
+        token
+      );
+      return response;
+    } catch (error) {
+      console.error("Error updating email template:", error);
+      return error;
     }
   },
 };

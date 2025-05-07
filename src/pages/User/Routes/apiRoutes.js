@@ -36,7 +36,7 @@ export const apiRoutes = {
     method: "POST",
   },
   getEmails: {
-    url: `${process.env.REACT_APP_API_BASE_URL}api/emails/:userId`,
+    url: `${process.env.REACT_APP_API_BASE_URL}api/emails`,
     method: "GET",
   },
   deleteEmail: {
@@ -46,5 +46,9 @@ export const apiRoutes = {
   getEmailTemplate: {
     url: `${process.env.REACT_APP_API_BASE_URL}api/emails/template/:templateId`,
     method: "GET",
+  },
+  updateEmailTemplate: {
+    url: `${process.env.REACT_APP_API_BASE_URL}api/emails/:templateId`,
+    method: "PUT",
   },
 };

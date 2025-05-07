@@ -54,6 +54,19 @@
       width: 100%;
       position: relative;
       gap: 1.5rem;
+      .remember-me{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        width: 100%;
+        p{
+          margin: 0;
+        }
+        input{
+          width: 15px;
+          height: 15px;
+        }
+      }
       div {
         display: flex;
         flex-direction: column;

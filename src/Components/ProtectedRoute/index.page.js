@@ -2,7 +2,6 @@
 import React, { useContext } from "react";
 import { Navigate } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
-import { ToastContainer } from "react-toastify";
 
 const ProtectedRoute = ({ children }) => {
   const { auth, loading } = useContext(AuthContext); // Get authentication state
@@ -21,9 +20,6 @@ const ProtectedRoute = ({ children }) => {
   return (
     <div>
       {children}
-      <ToastContainer 
-        theme="dark"
-      />
     </div>
   );
 };

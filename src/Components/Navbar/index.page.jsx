@@ -79,9 +79,7 @@ export default function Navbar() {
           </ScrollLink>
         ) : (
           <div
-            to="about"
             className="navbar-link"
-            smooth={true}
             onClick={() => handleNavigateAndScroll("about")}
           >
             About

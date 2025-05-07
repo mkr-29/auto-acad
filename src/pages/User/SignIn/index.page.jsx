@@ -6,6 +6,7 @@ import Footer from "../../../Components/Footer/index.page";
 import { useFormik } from "formik";
 import AuthContext from "../../../context/AuthContext";
 import { UserServices } from "../Services/UserServices";
+import { toast } from "react-toastify";
 
 export default function SignIn() {
   const [loading, setLoading] = useState(false);
@@ -15,6 +16,7 @@ export default function SignIn() {
     initialValues: {
       userId: "",
       password: "",
+      // rememberMe: false,
     },
     onSubmit: (values) => {
       handleSubmit();
@@ -50,22 +52,20 @@ export default function SignIn() {
         };
 
         login(token, user); // Save token and navigate to dashboard
+        toast.success("Login successful!");
       }
     } catch (error) {
       if (error.response) {
         console.error("Error Response:", error.response.data);
-        alert(
-          `Error: ${error.response.status} - ${
-            error.response.data.message || "Unauthorized"
-          }`
-        );
+        toast.error(error.response.data.message);
       } else {
         console.error("Error Message:", error.message);
+        toast.error(error.message);
       }
     }
     setLoading(false);
   };
-
+  
   return (
     <div className="sign-in bgc">
       <Navbar />
@@ -75,28 +75,34 @@ export default function SignIn() {
           <form action="" className="sign-in-box-form">
             <div>
               <label htmlFor="">USER ID</label>
-              <input 
+              <input
                 value={formik.values.userId}
                 onChange={formik.handleChange}
                 id="userId"
-                type="text" 
-                placeholder="Enter user id" 
+                type="text"
+                placeholder="Enter user id"
               />
             </div>
             <div>
               <label htmlFor="">PASSWORD</label>
-              <input 
+              <input
                 value={formik.values.password}
                 onChange={formik.handleChange}
                 id="password"
-                type="password" 
-                placeholder="Enter password" 
+                type="password"
+                placeholder="Enter password"
               />
             </div>
-            <div className="sign-in-box-form-check">
-              <input type="checkbox" name="" id="" />
+            {/* <div className="sign-in-box-form-check">
+              <input
+                type="checkbox"
+                name="rememberMe"
+                id="rememberMe"
+                checked={formik.values.rememberMe}
+                onChange={formik.handleChange}
+              />
               <label htmlFor="">Remember me</label>
-            </div>
+            </div> */}
             <button
               type="button"
               className="sign-in-box-inner-button"
