@@ -28,7 +28,7 @@ export const apiRoutes = {
     method: "POST",
   },
   getStudentsByUserId: {
-    url: `${process.env.REACT_APP_API_BASE_URL}api/students/user`,
+    url: `${process.env.REACT_APP_API_BASE_URL}api/students/mentor`,
     method: "GET",
   },
   addEmail: {
@@ -50,5 +50,9 @@ export const apiRoutes = {
   updateEmailTemplate: {
     url: `${process.env.REACT_APP_API_BASE_URL}api/emails/:templateId`,
     method: "PUT",
+  },
+  sendMail: {
+    url: `${process.env.REACT_APP_API_BASE_URL}api/email/send`,
+    method: "POST",
   },
 };

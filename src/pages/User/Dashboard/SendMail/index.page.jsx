@@ -1,61 +1,49 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { FaRegEdit } from "react-icons/fa";
-import "./SendMail.scss";
+import React from "react";
+import "../ComposeMail/SendMail.scss";
 import PrimaryButton from "../../../../Components/PrimaryButton/index.page";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { EmailService } from "../../Services/EmailServices";
 import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import emailjs from "@emailjs/browser";
 
 export default function SendMail() {
-  const [isEditing, setIsEditing] = useState(false);
-  const { mode, templateId } = useParams();
-  const [mailToRender, setMailToRender] = useState({});
-  const [content, setContent] = useState("");
+  const formik = useFormik({
+    initialValues: {
+      to_email: "",
+      to_name: "",
+      subject: "",
+      message: "",
+    },
+    onSubmit: (values) => {
+      sendMail(values);
+    },
+  });
 
-  const getEmailTemplate = async () => {
+  const sendMail = async (values) => {
     try {
-      const response = await EmailService.getEmailTemplate(templateId);
-      if (response.success) {
-        setMailToRender(response.data);
-        setContent(response.data.body);
-      } else {
-        toast.error("Error getting email template!");
+      const response = await emailjs.send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        {
+          to_email: values.to_email,
+          to_name: values.to_name,
+          subject: values.subject,
+          message: values.message,
+          html_content: values.message,
+        },
+        {
+          publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
+        }
+      );
+      
+      if (response.status === 200) {
+        toast.success("Email sent successfully!");
+        formik.resetForm();
       }
     } catch (error) {
-      console.error("Error getting email template:", error);
-    }
-  };
-
-  useEffect(() => {
-    getEmailTemplate();
-  }, []);
-
-  useEffect(() => {
-    if (mode === "edit") {
-      setIsEditing(true);
-    } else {
-      setIsEditing(false);
-    }
-  }, [mode]);
-
-  const updateEmailTemplate = async () => {
-    try {
-      const payload = {
-        subject: mailToRender.subject,
-        body: content,
-        id: mailToRender._id,
-      }
-      const response = await EmailService.updateEmailTemplate(payload);
-      if (response.success) {
-        toast.success("Email template updated successfully!");
-      } else {
-        toast.error("Error updating email template!");
-      }
-    } catch (error) {
-      console.error("Error updating email template:", error);
-      toast.error("Error updating email template!");
+      console.error("Failed to send email:", error);
+      toast.error("Failed to send email. Please try again.");
     }
   };
 
@@ -63,23 +51,37 @@ export default function SendMail() {
     <div>
       <div className="mail-preview">
         <h2 className="mail-preview-heading">Mail Preview</h2>
-        <div className="mail-preview-edit">
-          <FaRegEdit
-            onClick={() => {
-              setIsEditing(!isEditing);
-            }}
-          />
-        </div>
-        <div className="mail-preview-box">
+        <form onSubmit={formik.handleSubmit} className="mail-preview-box">
           <div className="mail-preview-header">
+            <span>To:</span>
+            <input
+              type="text"
+              value={formik.values.to_email || ""}
+              onChange={(e) => {
+                formik.setValues({
+                  ...formik.values,
+                  to_email: e.target.value,
+                });
+              }}
+            />
+            <span>Name:</span>
+            <input
+              type="text"
+              value={formik.values.to_name || ""}
+              onChange={(e) => {
+                formik.setValues({
+                  ...formik.values,
+                  to_name: e.target.value,
+                });
+              }}
+            />
             <span>Subject:</span>
             <input
               type="text"
-              value={mailToRender?.subject || ""}
-              disabled={!isEditing}
+              value={formik.values.subject || ""}
               onChange={(e) => {
-                setMailToRender({
-                  ...mailToRender,
+                formik.setValues({
+                  ...formik.values,
                   subject: e.target.value,
                 });
               }}
@@ -88,28 +90,19 @@ export default function SendMail() {
           <div className="mail-preview-body">
             <span>Body: </span>
             <ReactQuill
+              className={`mail-preview-compose editable`}
               theme="snow"
-              value={content || ""}
-              onChange={(value)=> {
-                setContent(value);
+              value={formik.values.message || ""}
+              onChange={(value) => {
+                formik.setValues({
+                  ...formik.values,
+                  message: value,
+                });
               }}
-              readOnly={!isEditing}
-              className={`mail-preview-compose ${isEditing ? "editable" : "non-editable"}`}
             />
           </div>
-        </div>
-        <PrimaryButton
-          text={isEditing ? "Save Mail Template" : "Send Mail"}
-          onClick={() => {
-            setIsEditing(false);
-            if(isEditing){
-              updateEmailTemplate();
-            }else{
-              // sendEmail();
-              console.log(mailToRender);
-            }
-          }}
-        />
+          <PrimaryButton text={"Send Mail"} type="submit" />
+        </form>
       </div>
     </div>
   );

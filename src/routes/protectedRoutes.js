@@ -1,5 +1,4 @@
 import Dashboard from "../pages/User/Dashboard/index.page";
-import SendMail from "../pages/User/Dashboard/SendMail/index.page";
 import EnterStudentMarks from "../pages/User/Dashboard/EnterStudentMarks/index.page";
 import EnterMarksManually from "../pages/User/Dashboard/EnterStudentMarks/EnterMarksManually/index.page";
 import { appRoutes, userRoutes } from "./appRoutes";
@@ -7,6 +6,8 @@ import AddStudentToMentor from "../pages/User/Dashboard/AddStudentToMentor/index
 import SendMailToStudent from "../pages/User/Dashboard/SendMailToStudent/index.page";
 import ViewBatchDetails from "../pages/User/Dashboard/ViewBatchDetails/index.page";
 import AddEmailTemplate from "../pages/User/Dashboard/AddEmailTemplate/index.page";
+import ComposeMail from "../pages/User/Dashboard/ComposeMail/index.page";
+import SendMail from "../pages/User/Dashboard/SendMail/index.page";
 
 const protectedRoutes = [
   {
@@ -57,7 +58,7 @@ const protectedRoutes = [
     path: "/user/mail/:mode/:templateId",
     element: (
       <Dashboard>
-        <SendMail />
+        <ComposeMail />
       </Dashboard>
     ),
   },
@@ -74,6 +75,14 @@ const protectedRoutes = [
     element: (
       <Dashboard>
         <AddEmailTemplate />
+      </Dashboard>
+    ),
+  },
+  {
+    path: userRoutes.sendMail,
+    element: (
+      <Dashboard>
+        <SendMail />
       </Dashboard>
     ),
   },

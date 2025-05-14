@@ -18,6 +18,7 @@ const userRoutes = {
   enterMarksManually: "/user/enter-student-marks-manual",
   enterMarksUsingCsv: "/user/enter-student-marks-csv",
   addEmailTemplate: "/user/add-email-template",
+  sendMail: "/user/send-mail",
 }
 
 export { appRoutes, userRoutes };

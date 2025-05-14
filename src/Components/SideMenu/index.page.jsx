@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { userRoutes } from "../../routes/appRoutes";
 
 export default function SideMenu({ isMenuOpen, setIsMenuOpen }) {
+  
   return (
     <div className="side-menu">
       <ul>
@@ -39,12 +40,22 @@ export default function SideMenu({ isMenuOpen, setIsMenuOpen }) {
         </li>
         <li>
           <Link
-            to={userRoutes.viewStudentDetails}
+            to={userRoutes.viewStudents}
             onClick={() => {
               setIsMenuOpen(!isMenuOpen);
             }}
           >
             View Students
+          </Link>
+        </li>
+        <li>
+          <Link
+            to={userRoutes.sendMail}
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+            }}
+          >
+            Send Mail to Student
           </Link>
         </li>
       </ul>

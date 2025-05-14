@@ -122,4 +122,23 @@ export const EmailService = {
       return error;
     }
   },
+  sendMail: async (data) => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      alert("Unauthorized");
+      return;
+    }
+    try {
+      const response = await apiRequest(
+        apiRoutes.sendMail.method,
+        apiRoutes.sendMail.url,
+        data,
+        token
+      );
+      return response;
+    } catch (error) {
+      console.error("Error sending mail:", error);
+      return error;
+    }
+  },
 };
