@@ -19,13 +19,14 @@ export default function ViewBatchDetails() {
   });
   const [selectedStudentsEmail, setSelectedStudentsEmail] = useState([]);
   const userId = getUserId();
+  const [studentsList, setStudentsList] = useState([]);
 
   const getStudents = async () => {
     try {
       const response = await StudentService.getStudentsByUserId(userId);
 
       if (response.success) {
-        console.log("students", response.data);
+        setStudentsList(response.data);
       } else {
         toast.error(response.message);
         console.error("Error Message:", response.message);
@@ -85,11 +86,7 @@ export default function ViewBatchDetails() {
   const columns = [
     "Student Name",
     "Roll Number",
-    "T1",
-    "T2",
-    "T3",
-    "Attendance",
-    "Email",
+    "",
   ];
 
   const filterContent = (
@@ -251,7 +248,7 @@ export default function ViewBatchDetails() {
       )}
       <div className="view-batch-table">
         <Table
-          data={data}
+          data={studentsList}
           columns={columns}
           filterParams={filterParams}
           selectedStudentsEmail={selectedStudentsEmail}

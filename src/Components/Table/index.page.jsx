@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { BiSort } from "react-icons/bi";
 import "./Table.scss";
+import PrimaryButton from "../PrimaryButton/index.page";
 
 export default function Table({ data, columns, filterParams, ...props }) {
   const [sortedData, setSortedData] = useState(data); // Use state for data
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null }); // Track sort order
   const [filteredData, setFilteredData] = useState(data); // Use state for filtered data
+  const columnData = ["name", "roll", "View Details"];
+  const [expandedRowIndex, setExpandedRowIndex] = useState(null);
+  const [parentsData, setParentsData] = useState([]);
 
   // Sort data based on column
   const sortData = (column) => {
@@ -128,6 +132,8 @@ export default function Table({ data, columns, filterParams, ...props }) {
     setSortedData(filteredData);
   }, [filteredData]);
 
+  console.log("parentsData", parentsData);
+
   return (
     <table className="table">
       <thead>
@@ -158,21 +164,116 @@ export default function Table({ data, columns, filterParams, ...props }) {
         </tr>
       </thead>
       <tbody>
-        {sortedData.map((row, index) => (
-          <tr key={index}>
-            <td>
-              <input 
-                type="checkbox" 
-                onClick={()=>{
-                  selectedRows(index);
-                }} 
-                checked={props.selectedStudentsEmail.includes(row.Email)}
-              />
-            </td>
-            {columns.map((column, index) => (
-              <td key={index}>{row[column]}</td>
-            ))}
-          </tr>
+        {sortedData.map((row, rowIndex) => (
+          <>
+            <tr key={rowIndex}>
+              <td>
+                <input
+                  type="checkbox"
+                  onClick={() => {
+                    selectedRows(rowIndex);
+                  }}
+                  checked={props.selectedStudentsEmail.includes(row.Email)}
+                />
+              </td>
+              {columnData.map((column, index) => (
+                <td key={index}>
+                  {column === "View Details" ? (
+                    <span
+                      onClick={() => {
+                        setExpandedRowIndex(
+                          expandedRowIndex === rowIndex ? null : rowIndex
+                        );
+                      }}
+                      className="view-more-btn"
+                    >
+                      {expandedRowIndex === rowIndex ? "Hide" : "View More"}
+                    </span>
+                  ) : (
+                    row[column]
+                  )}
+                </td>
+              ))}
+            </tr>
+            <tr
+              className={`view-more-row ${
+                expandedRowIndex === rowIndex ? "show" : "hide"
+              }`}
+            >
+              <td colSpan={columns.length + 1}>
+                <div className="view-more-row-data">
+                  <div className="view-more-row-data-item">
+                    <div>
+                      <span>CGPA</span>: {row?.academics?.cgpa}
+                    </div>
+                    <div>
+                      <span>Last Semester SGPA</span>: {row?.academics?.sgpa}
+                    </div>
+                    <div>
+                      <span>Backlogs</span>: {row?.academics?.backlog}
+                    </div>
+                    <div>
+                      <span>Total Credits</span>: {row?.academics?.credits}
+                    </div>
+                  </div>
+                  <div className="view-more-row-data-table">
+                    <span>Subjects</span>
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>S.No</th>
+                          <th>Subject</th>
+                          <th>Subject Code</th>
+                          <th>Attendance</th>
+                          <th>T1(15)</th>
+                          <th>T2(25)</th>
+                          <th>T3(35)</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {row?.subjects?.map((subject, index) => (
+                          <tr>
+                            <td>{subject?.subjectNo}</td>
+                            <td>{subject?.subjectName}</td>
+                            <td>{subject?.subjectCode}</td>
+                            <td>{subject?.attendance}</td>
+                            <td>
+                              {subject?.marks?.find((mark) => mark.testNo === 1)
+                                ?.score || "-"}
+                            </td>
+                            <td>
+                              {subject?.marks?.find((mark) => mark.testNo === 2)
+                                ?.score || "-"}
+                            </td>
+                            <td>
+                              {subject?.marks?.find((mark) => mark.testNo === 3)
+                                ?.score || "-"}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                    <div>
+                      <PrimaryButton
+                        text="Send Mail to Parents"
+                        onClick={() => {
+                          setParentsData(row.parents);
+                          console.log("Send Mail to Parents");
+                        }}
+                        style={{
+                          fontSize: "14px",
+                          padding: "5px 10px",
+                          borderRadius: "5px",
+                          border: "none",
+                          cursor: "pointer",
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </>
         ))}
       </tbody>
     </table>
