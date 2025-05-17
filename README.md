@@ -1,6 +1,54 @@
-# Getting Started with Create React App
+# Auto-Acad Project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a React-based web application built with modern web technologies. The development work is being done in the `dev` branch.
+
+## Tech Stack
+
+- React 18.3.1
+- React Router DOM v6
+- SASS for styling
+- Formik for form handling
+- React Quill for rich text editing
+- EmailJS for email functionality
+- React Icons for iconography
+- React Scroll for smooth scrolling
+- React Toastify for notifications
+- Jotai for state management
+
+## Project Structure
+
+```
+auto-acad/
+├── src/           # Source files
+├── public/        # Public assets
+├── G103/          # Project specific files
+└── node_modules/  # Dependencies
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (Latest LTS version recommended)
+- Yarn package manager
+
+### Installation
+
+1. Clone the repository:
+```bash
+git clone [repository-url]
+cd auto-acad
+```
+
+2. Switch to the dev branch:
+```bash
+git checkout dev
+```
+
+3. Install dependencies:
+```bash
+yarn install
+```
 
 ## Available Scripts
 
@@ -8,7 +56,7 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.\
+Runs the app in development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
@@ -16,8 +64,7 @@ You may also see any lint errors in the console.
 
 ### `yarn test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode.
 
 ### `yarn build`
 
@@ -27,49 +74,57 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Key Features
 
-### `yarn eject`
+- Modern React with functional components
+- Responsive design
+- Form handling with validation
+- Rich text editing capabilities
+- Email integration
+- Smooth scrolling navigation
+- Toast notifications
+- State management with Jotai
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Development
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+All development work is being done in the `dev` branch. Please make sure to:
+1. Always work on feature branches created from `dev`
+2. Follow the project's coding standards
+3. Write meaningful commit messages
+4. Create pull requests to merge back into `dev`
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Dependencies
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Core Dependencies
+- react: ^18.3.1
+- react-dom: ^18.3.1
+- react-router-dom: ^6.26.2
+- react-scripts: 5.0.1
 
-## Learn More
+### UI and Styling
+- sass: ^1.79.4
+- react-icons: ^5.3.0
+- react-scroll: ^1.9.0
+- react-toastify: ^11.0.5
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Form and Data Handling
+- formik: ^2.4.6
+- react-quill: ^2.0.0
+- jotai: ^2.12.4
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Communication
+- @emailjs/browser: ^4.4.1
+- axios: ^1.7.8
+- nodemailer: ^6.9.16
 
-### Code Splitting
+## Contributing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-### Analyzing the Bundle Size
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-
-Packages Used:
-- react-router-dom
-- react-scroll
-- react-icons
+This project is licensed under the terms included in the LICENSE file.
