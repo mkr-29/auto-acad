@@ -7,19 +7,32 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { EmailService } from "../../Services/EmailServices";
 import { toast } from "react-toastify";
+import emailjs from "@emailjs/browser";
+import { useAtom } from "jotai";
+import { parentsDataAtom } from "../../../../atom";
 
 export default function ComposeMail() {
   const [isEditing, setIsEditing] = useState(false);
   const { mode, templateId } = useParams();
   const [mailToRender, setMailToRender] = useState({});
   const [content, setContent] = useState("");
+  const [sendMailData, setSendMailData] = useState({
+    to_email: "",
+    to_name: "",
+    to_student_name: "",
+    subject: "",
+    message: "",
+  });
+  const [parentsData, setParentsData] = useAtom(parentsDataAtom);
 
   const getEmailTemplate = async () => {
     try {
       const response = await EmailService.getEmailTemplate(templateId);
       if (response.success) {
-        setMailToRender(response.data);
-        setContent(response.data.body);
+        const { data } = response;
+        console.log("response", data);
+        setMailToRender(data);
+        setContent(data.body);
       } else {
         toast.error("Error getting email template!");
       }
@@ -28,8 +41,56 @@ export default function ComposeMail() {
     }
   };
 
+  const sendMail = async () => {
+    try {
+      const response = await emailjs.send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        {
+          to_email: sendMailData.to_email,
+          to_name: sendMailData.to_name,
+          to_student_name: sendMailData.to_student_name,
+          subject: mailToRender.subject,
+          message: mailToRender.body,
+          html_content: mailToRender.body,
+        },
+        {
+          publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
+        }
+      );
+      
+      if (response.status === 200) {
+        toast.success("Email sent successfully!");
+      }
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      toast.error("Failed to send email. Please try again.");
+    }
+  };
+
   useEffect(() => {
     getEmailTemplate();
+    if(parentsData){
+      if(parentsData?.father){
+        setSendMailData({
+          to_email: parentsData?.father?.email,
+          to_name: parentsData?.father?.name,
+          to_student_name: parentsData?.student,
+          subject: mailToRender.subject,
+          message: mailToRender.body,
+        });
+        return;
+      } else if(parentsData?.mother){
+        setSendMailData({
+          to_email: parentsData?.mother?.email,
+          to_name: parentsData?.mother?.name,
+          to_student_name: parentsData?.student,
+          subject: mailToRender.subject,
+          message: mailToRender.body,
+        });
+        return;
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -40,6 +101,9 @@ export default function ComposeMail() {
     }
   }, [mode]);
 
+  console.log("parentsData", parentsData);
+  console.log("mailToRender", mailToRender);
+  console.log("sendMailData", sendMailData);
   const updateEmailTemplate = async () => {
     try {
       const payload = {
@@ -105,8 +169,7 @@ export default function ComposeMail() {
             if(isEditing){
               updateEmailTemplate();
             }else{
-              // sendEmail();
-              console.log(mailToRender);
+              sendMail();
             }
           }}
         />

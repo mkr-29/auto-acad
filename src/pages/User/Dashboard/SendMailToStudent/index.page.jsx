@@ -5,6 +5,7 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import PrimaryButton from "../../../../Components/PrimaryButton/index.page";
 import SelectTemplate from "../../../../Components/SelectTemplate/index.page";
 import { toast } from "react-toastify";
+import { userRoutes } from "../../../../routes/appRoutes";
 
 export default function SendMailToStudent() {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ export default function SendMailToStudent() {
             }
             onClick={() => {
               if (selectedTemplate) {
-                navigate(`/user/send-mail/${selectedTemplate}`);
+                navigate(userRoutes.mail(selectedTemplate, "view"));
               } else {
                 toast.warning("Please select a template!");
               }

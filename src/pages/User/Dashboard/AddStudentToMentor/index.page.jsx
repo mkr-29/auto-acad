@@ -74,9 +74,7 @@ export default function AddStudentToMentor() {
 
   // Submit student data to database
   const handleSubmit = async () => {
-    console.log("payload", submitPayload);
     const newPayload = submitPayload;
-    console.log("newPayload1", newPayload);
 
     newPayload.userId = userId;
     console.log("newPayload2", newPayload);

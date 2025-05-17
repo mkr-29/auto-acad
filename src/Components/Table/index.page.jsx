@@ -1,15 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { BiSort } from "react-icons/bi";
 import "./Table.scss";
-import PrimaryButton from "../PrimaryButton/index.page";
+import { useAtom } from "jotai";
+import { parentsDataAtom } from "../../atom";
+import { userRoutes } from "../../routes/appRoutes";
+import { Link } from "react-router-dom";
 
-export default function Table({ data, columns, filterParams, ...props }) {
+export default function Table({
+  data,
+  columns,
+  filterParams,
+  ...props
+}) {
   const [sortedData, setSortedData] = useState(data); // Use state for data
   const [sortConfig, setSortConfig] = useState({ key: null, direction: null }); // Track sort order
   const [filteredData, setFilteredData] = useState(data); // Use state for filtered data
   const columnData = ["name", "roll", "View Details"];
   const [expandedRowIndex, setExpandedRowIndex] = useState(null);
-  const [parentsData, setParentsData] = useState([]);
+  const [parentsData, setParentsData] = useAtom(parentsDataAtom);
 
   // Sort data based on column
   const sortData = (column) => {
@@ -253,21 +261,18 @@ export default function Table({ data, columns, filterParams, ...props }) {
                         ))}
                       </tbody>
                     </table>
-                    <div>
-                      <PrimaryButton
-                        text="Send Mail to Parents"
+                    <div className="send-mail-to-parents-btn">
+                      <Link
                         onClick={() => {
-                          setParentsData(row.parents);
-                          console.log("Send Mail to Parents");
+                          setParentsData({
+                            ...row.parents,
+                            student: row.name,
+                          });
                         }}
-                        style={{
-                          fontSize: "14px",
-                          padding: "5px 10px",
-                          borderRadius: "5px",
-                          border: "none",
-                          cursor: "pointer",
-                        }}
-                      />
+                        to={userRoutes.sendMailToStudent}
+                      >
+                        Send Mail to Parents
+                      </Link>
                     </div>
                   </div>
                 </div>

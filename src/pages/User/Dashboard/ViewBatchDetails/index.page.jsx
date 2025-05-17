@@ -9,6 +9,7 @@ import Table from "../../../../Components/Table/index.page";
 import { StudentService } from "../../Services/StudentService";
 import { toast } from "react-toastify";
 import { getUserId } from "../../Utils/helper";
+import Pagination from "../../../../Components/Pagination/index.page";
 
 export default function ViewBatchDetails() {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -20,13 +21,21 @@ export default function ViewBatchDetails() {
   const [selectedStudentsEmail, setSelectedStudentsEmail] = useState([]);
   const userId = getUserId();
   const [studentsList, setStudentsList] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
-  const getStudents = async () => {
+  const getStudents = async (page = 1, limit = 10) => {
+    const params = {
+      page,
+      limit,
+    };
     try {
-      const response = await StudentService.getStudentsByUserId(userId);
+      const response = await StudentService.getStudentsByUserId(userId, params);
 
       if (response.success) {
         setStudentsList(response.data);
+        setCurrentPage(response.pagination.page);
+        setTotalPages(response.pagination.totalPages);
       } else {
         toast.error(response.message);
         console.error("Error Message:", response.message);
@@ -36,53 +45,6 @@ export default function ViewBatchDetails() {
     }
   };
 
-  const data = [
-    {
-      "Student Name": "John Doe",
-      "Roll Number": "CS77A001",
-      T1: "90",
-      T2: "75",
-      T3: "83",
-      Attendance: "90",
-      Email: "mayank.k9802@gmail.com",
-    },
-    {
-      "Student Name": "Jane Doe",
-      "Roll Number": "CS77A002",
-      T1: "85",
-      T2: "40",
-      T3: "75",
-      Attendance: "50",
-      Email: "211317@juitsolan.in",
-    },
-    {
-      "Student Name": "John Smith",
-      "Roll Number": "CS77A003",
-      T1: "30",
-      T2: "85",
-      T3: "60",
-      Attendance: "70",
-      Email: "mayank.kumar9802@gmail.com",
-    },
-    {
-      "Student Name": "Jane Smith",
-      "Roll Number": "CS77A004",
-      T1: "75",
-      T2: "84",
-      T3: "48",
-      Attendance: "60",
-      Email: "211314@juitsolan.in",
-    },
-    {
-      "Student Name": "John Wick",
-      "Roll Number": "CS77A005",
-      T1: "70",
-      T2: "25",
-      T3: "50",
-      Attendance: "30",
-      Email: "211262@juitsolan.in",
-    },
-  ];
   const columns = [
     "Student Name",
     "Roll Number",
@@ -253,6 +215,12 @@ export default function ViewBatchDetails() {
           filterParams={filterParams}
           selectedStudentsEmail={selectedStudentsEmail}
           setSelectedStudentsEmail={setSelectedStudentsEmail}
+        />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onNextPage={() => getStudents(currentPage + 1, 10)}
+          onPreviousPage={() => getStudents(currentPage - 1, 10)}
         />
       </div>
     </div>

@@ -74,11 +74,17 @@ export const StudentService = {
       }
     }
   },
-  getStudentsByUserId: async (userId) => {
+  getStudentsByUserId: async (userId, params) => {
+    const token = localStorage.getItem("authToken");
+    if (!token) {
+      alert("Unauthorized");
+      return;
+    }
     try {
       const response = await apiRequest(
         apiRoutes.getStudentsByUserId.method,
-        apiRoutes.getStudentsByUserId.url + `/${userId}`
+        apiRoutes.getStudentsByUserId.url + `/${userId}`,
+        token,
       );
       return response;
     } catch (error) {
