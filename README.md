@@ -2,6 +2,10 @@
 
 This project is a React-based web application built with modern web technologies. The development work is being done in the `dev` branch.
 
+## Backend Repository
+
+The backend for this project is hosted at: [auto-acad-backend](https://github.com/mkr-29/auto-acad-backend)
+
 ## Tech Stack
 
 - React 18.3.1
